@@ -1,3 +1,4 @@
+import { Flex } from '@chakra-ui/react'
 import React from 'react'
 import Navbar from '../../components/NavBar'
 import styles from './styles.module.scss'
@@ -5,7 +6,9 @@ import styles from './styles.module.scss'
 const NewFeed = () => {
   return (
     <div className={styles.container}>
-      <Navbar />
+      <Flex>
+        <Navbar />
+      </Flex>
     </div>
   )
 }
