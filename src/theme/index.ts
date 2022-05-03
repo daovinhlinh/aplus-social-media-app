@@ -8,6 +8,16 @@ const config = {
 }
 
 const theme = {
+  styles: {
+    global: {
+      svg: {
+        display: 'inline'
+      },
+      image: {
+        display: 'inline'
+      }
+    }
+  },
   ...foundations,
   config
 }
