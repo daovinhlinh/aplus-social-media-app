@@ -10,7 +10,7 @@ import {
 import React from "react";
 import Options from "../../assets/Icons/Options";
 
-const DetailCard = () => {
+const DetailCard = (props) => {
     return (
         <HStack width={"100%"}>
             <Image

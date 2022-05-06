@@ -12,6 +12,7 @@ const Login = () => {
     const suffixIcons = [
         {
             icon: <Emoji />,
+            label: "emoji",
             onPress: () => {
                 console.log("Emoji");
             },

@@ -5,7 +5,8 @@ import NewFeed from "./pages/NewFeed";
 function App() {
     return (
         <div className="App">
-            <Login />
+            {/* <Login /> */}
+            <NewFeed />
         </div>
     );
 }
