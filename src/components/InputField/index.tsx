@@ -65,9 +65,10 @@ const InputField = (props: IInputField) => {
                         alignItems="center"
                         w={35 * suffixIcons.length}
                         mr={3}
-                        children={suffixIcons.map((item: ISuffixIcon) => {
-                            return (
+                        children={suffixIcons.map(
+                            (item: ISuffixIcon, index) => (
                                 <IconButton
+                                    key={index}
                                     style={{
                                         lineHeight: 0,
                                         minWidth: 0,
@@ -77,8 +78,8 @@ const InputField = (props: IInputField) => {
                                     icon={item.icon}
                                     onClick={item.onPress}
                                 />
-                            );
-                        })}
+                            )
+                        )}
                     />
                 )}
             </InputGroup>

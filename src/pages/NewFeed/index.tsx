@@ -9,7 +9,18 @@ const NewFeed = () => {
     return (
         <Flex width="100%" flexDirection="column">
             <Navbar />
-            <FeedCard />
+            <Flex>
+                <Container>
+                    <DetailCard />
+                    <DetailCard />
+                    <DetailCard />
+                    <DetailCard />
+                </Container>
+                <Container>
+                    <FeedCard />
+                </Container>
+                <Container></Container>
+            </Flex>
         </Flex>
     );
 };
