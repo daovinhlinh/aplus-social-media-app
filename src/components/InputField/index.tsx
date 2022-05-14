@@ -20,6 +20,8 @@ interface IInputField {
     suffixIcons?: ISuffixIcon[];
     prefixIcons?: ReactElement[];
     placeholder?: string;
+    width?: string;
+    [x: string]: any; //rest props
 }
 
 export enum Variant {
@@ -30,10 +32,10 @@ export enum Variant {
 }
 
 const InputField = (props: IInputField) => {
-    const { image, variant, suffixIcons, prefixIcons, placeholder } = props;
+    const { image, variant, suffixIcons, prefixIcons, placeholder, width, ...rest } = props;
 
     return (
-        <Flex>
+        <Flex w={width} justifyContent="center" {...rest}>
             {image && (
                 <Image
                     src="https://www.w3schools.com/howto/img_avatar.png"
@@ -43,7 +45,7 @@ const InputField = (props: IInputField) => {
                     mr="20px"
                 />
             )}
-            <InputGroup variant={variant} pr="1">
+            <InputGroup variant={variant} pr="1" >
                 {prefixIcons && (
                     <InputLeftElement
                         children={prefixIcons.map((icon) => icon)}
@@ -51,10 +53,11 @@ const InputField = (props: IInputField) => {
                     />
                 )}
                 <Input
+                    focusBorderColor='red.500'
+                    borderColor="gray.200"
                     borderRadius={15}
                     paddingRight={suffixIcons ? 38 * suffixIcons.length : 3}
                     placeholder={placeholder}
-                    // variant="outline"
                 />
                 {suffixIcons && (
                     <InputRightElement
