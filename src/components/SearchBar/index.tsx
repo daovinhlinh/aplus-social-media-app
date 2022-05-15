@@ -10,7 +10,7 @@ const SearchBar = () => {
           <Search />,
         ]
       } />
-      <Input placeholder="Search" paddingRight={50} />
+      <Input placeholder="Search" paddingRight={50} border="none" backgroundColor="gray.100" />
 
     </InputGroup>
   )

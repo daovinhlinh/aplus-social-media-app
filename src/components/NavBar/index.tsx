@@ -7,9 +7,9 @@ import SearchBar from "../SearchBar";
 
 const Navbar = () => {
     return (
-        <HStack width="100%" justifyContent="space-between" alignItems="center">
+        <HStack width="100%" justifyContent="space-between" alignItems="center" bgColor="#fff" height="8vh" py="10px" px="20px">
             <Setting />
-            <Center minWidth="50%">
+            <Center minWidth="30%">
                 <SearchBar />
             </Center>
             <HStack spacing="30px">

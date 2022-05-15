@@ -35,17 +35,17 @@ const InputField = (props: IInputField) => {
     const { image, variant, suffixIcons, prefixIcons, placeholder, width, ...rest } = props;
 
     return (
-        <Flex w={width} justifyContent="center" {...rest}>
+        <Flex w={width} justifyContent="center" alignItems="center" {...rest}>
             {image && (
                 <Image
                     src="https://www.w3schools.com/howto/img_avatar.png"
-                    height="40px"
-                    width="40px"
+                    height="35px"
+                    width="35px"
                     borderRadius={100}
                     mr="20px"
                 />
             )}
-            <InputGroup variant={variant} pr="1" >
+            <InputGroup variant={variant} pr="1" height="35px">
                 {prefixIcons && (
                     <InputLeftElement
                         children={prefixIcons.map((icon) => icon)}
@@ -58,6 +58,8 @@ const InputField = (props: IInputField) => {
                     borderRadius={15}
                     paddingRight={suffixIcons ? 38 * suffixIcons.length : 3}
                     placeholder={placeholder}
+                    height="35px"
+                    fontWeight="400"
                 />
                 {suffixIcons && (
                     <InputRightElement

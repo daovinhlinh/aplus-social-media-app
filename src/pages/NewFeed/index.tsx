@@ -1,27 +1,20 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Container, Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import People from "../../assets/Icons/People";
 import DetailCard from "../../components/DetailCard";
 import FeedCard from "../../components/FeedCard";
+import IconCard from "../../components/IconCard";
 import Navbar from "../../components/NavBar";
+import PageContainer from "../../components/PageContainer";
 import styles from "./styles.module.scss";
+
+import Options from '/src/assets/images/options.svg'
 
 const NewFeed = () => {
     return (
-        <Flex width="100%" flexDirection="column">
-            <Navbar />
-            <Flex>
-                <Container>
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                </Container>
-                <Container>
-                    <FeedCard />
-                </Container>
-                <Container></Container>
-            </Flex>
-        </Flex>
+        <PageContainer>
+            <FeedCard />
+        </PageContainer>
     );
 };
 

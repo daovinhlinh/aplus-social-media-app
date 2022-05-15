@@ -8,15 +8,15 @@ import InputField from "../InputField";
 
 const FeedCard = () => {
     return (
-        <Box width={"100%"}>
+        <Box width={"100%"} bgColor="#FFF" px="30px" py="20px" borderRadius="15px">
             <DetailCard />
-            <Text textAlign={"left"} marginTop={"2"}>
+            <Text textAlign={"left"} marginTop={"2"} fontWeight={700}>
                 One of the perks of weeking in an international compony is
                 sharing knowledge with your colleagues.
             </Text>
             <Flex
                 justifyContent="space-between"
-                paddingY="15"
+                paddingY="3"
                 borderY="1px"
                 borderColor="gray.300"
                 my={4}
@@ -24,18 +24,18 @@ const FeedCard = () => {
             >
                 <HStack>
                     <Heart />
-                    <Text>100 Likes</Text>
+                    <Text fontSize={14} fontWeight={600} color="#696969">100 Likes</Text>
                 </HStack>
                 <HStack>
                     <Comment />
-                    <Text>100 Comments</Text>
+                    <Text fontSize={14} fontWeight={600} color="#696969">100 Comments</Text>
                 </HStack>
                 <HStack>
                     <Share />
-                    <Text>100 Comments</Text>
+                    <Text fontSize={14} fontWeight={600} color="#696969">100 Comments</Text>
                 </HStack>
             </Flex>
-            <InputField />
+            <InputField image="https://www.w3schools.com/howto/img_avatar.png" placeholder="Write your comment..." />
         </Box>
     );
 };

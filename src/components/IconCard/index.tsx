@@ -1,12 +1,23 @@
 import {
-    Box
+    Box, Text
 } from "@chakra-ui/react";
-import React from "react";
+import React, { ReactChild } from "react";
+import People from "../../assets/Icons/People";
 
+interface IconCardProps {
+    leftIcon?: ReactChild;
+    rightIcon?: ReactChild;
+    label: string;
+    onClick: () => void;
+    [x: string]: any; //rest props
+}
 
-const IconCard = (props: any) => {
+const IconCard = (props: IconCardProps) => {
+    const { leftIcon, rightIcon, label, onClick, ...buttonStyle } = props;
+
     return (
         <Box
+            onClick={onClick}
             as='button'
             minHeight='50px'
             lineHeight='1.2'
@@ -19,15 +30,36 @@ const IconCard = (props: any) => {
             fontWeight='semibold'
             bg='none'
             color='#000'
-            _hover={{ bg: 'white', color: 'red.500' }}
-            _active={{ bg: 'gray.100', color: 'red.500', outlineWidth: 0 }}
-            _focus={{
-                boxShadow:
-                    '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            _hover={{ bg: 'white', color: 'red.500', boxShadow: "base" }
+            }
+            _active={{
+                bg: 'gray.100', color: 'red.500',
+                boxShadow: "base"
             }}
+            display='flex'
+            flexDirection='row'
+            alignItems='center'
+            justifyContent='space-between'
+            width='100%'
+            {...buttonStyle}
         >
-            Join Group
-        </Box>
+            <Box>
+                {leftIcon}
+            </Box>
+            <Box width="70%">
+                <Text
+                    overflow="hidden"
+                    textOverflow="ellipsis"
+                    whiteSpace="nowrap"
+                    textAlign="left"
+                >
+                    {label}
+                </Text>
+            </Box>
+            <Box>
+                {rightIcon}
+            </Box>
+        </Box >
     );
 };
 
