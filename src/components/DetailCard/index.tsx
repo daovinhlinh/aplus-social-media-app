@@ -10,7 +10,7 @@ import {
 import React from "react";
 import Options from "../../assets/Icons/Options";
 
-const DetailCard = (props) => {
+const DetailCard = (props :any) => {
     return (
         <HStack width={"100%"}>
             <Image
@@ -23,15 +23,14 @@ const DetailCard = (props) => {
             />
             <Box textAlign={"start"}>
                 <Text color="black" fontWeight="bold" fontSize={"md"}>
-                    hello
+                    Đào Vĩnh Ling
                 </Text>
                 <Text color="gray.500" fontSize={"sm"}>
-                    hello
+                    Buck Foiz
                 </Text>
             </Box>
             <Spacer />
             <Box alignSelf={"flex-start"}>
-                <Options />
             </Box>
         </HStack>
     );

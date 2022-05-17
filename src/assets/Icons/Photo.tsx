@@ -14,6 +14,8 @@ const Photo = () => {
                 fill="#9D9D9D"
             />
         </svg>
+        
+        
     );
 };
 
