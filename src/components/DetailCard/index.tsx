@@ -7,30 +7,40 @@ import {
     Text,
     VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { ReactChild } from "react";
 import Options from "../../assets/Icons/Options";
 
-const DetailCard = (props :any) => {
+
+
+
+interface DetailCardProps {
+    leftImg?: ReactChild;
+    rightIcon?: ReactChild;
+    label1: string;
+    label2: string;
+    onClick: () => void;
+    [x: string]: any; //rest props
+}
+
+const DetailCard = (props :DetailCardProps) => {
+
+    const { leftImg, rightIcon, label1, label2, onClick, ...buttonStyle } = props;
     return (
-        <HStack width={"100%"}>
-            <Image
-                display="inline"
-                src="https://www.w3schools.com/howto/img_avatar.png"
-                height={50}
-                width={50}
-                borderRadius={100}
-                marginRight={3}
-            />
+        <HStack width={"100%"} py = {4} px={4} onClick={onClick} {...buttonStyle}>
+            <Box>
+                {leftImg}
+            </Box>
             <Box textAlign={"start"}>
                 <Text color="black" fontWeight="bold" fontSize={"md"}>
-                    Đào Vĩnh Ling
+                    {label1}
                 </Text>
                 <Text color="gray.500" fontSize={"sm"}>
-                    Buck Foiz
+                    {label2}
                 </Text>
             </Box>
             <Spacer />
             <Box alignSelf={"flex-start"}>
+                {rightIcon}
             </Box>
         </HStack>
     );

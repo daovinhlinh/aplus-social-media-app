@@ -17,27 +17,22 @@ import styles from "./styles.module.scss";
 
 
 
-const Profile = () => {
+const FriendList = () => {
 
     
     return (
         <div className={styles.profile}>
                 
                 <PageContainer>
-                        <Box>
-                            <div className={styles.backgroundprofile}>
-                                <BackgroundProfile />
-                            </div>
+                        <Box className={styles.backgroundprofile}>
+                            
+                            <BackgroundProfile />
+                            
                         </Box>
-                        <Box>
-                            <div className={styles.mainprofile}>
-                                <MainProfile/>
-                            </div>
-                        </Box>
-                        <Box display = 'none'>
-                            <div className={styles.friendslist}>
-                                <Friendslist/>
-                            </div>
+                        <Box className={styles.friendslist}>
+                           
+                            <Friendslist/>
+                            
                         </Box>
                 </PageContainer>
                 
@@ -45,4 +40,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default FriendList;

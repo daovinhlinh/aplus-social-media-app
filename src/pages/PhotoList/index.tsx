@@ -13,31 +13,27 @@ import IconCard from "../../components/IconCard";
 import MainProfile from "../../components/MainProfile";
 import Navbar from "../../components/NavBar";
 import PageContainer from "../../components/PageContainer";
+import Photoslist from "../../components/PhotosList";
 import styles from "./styles.module.scss";
 
 
 
-const Profile = () => {
+const PhotoList = () => {
 
     
     return (
         <div className={styles.profile}>
                 
                 <PageContainer>
-                        <Box>
-                            <div className={styles.backgroundprofile}>
-                                <BackgroundProfile />
-                            </div>
+                        <Box className={styles.backgroundprofile}>
+                            
+                            <BackgroundProfile />
+                            
                         </Box>
-                        <Box>
-                            <div className={styles.mainprofile}>
-                                <MainProfile/>
-                            </div>
-                        </Box>
-                        <Box display = 'none'>
-                            <div className={styles.friendslist}>
-                                <Friendslist/>
-                            </div>
+                        <Box className={styles.friendslist}>
+                           
+                            <Photoslist/>
+                            
                         </Box>
                 </PageContainer>
                 
@@ -45,4 +41,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default PhotoList;
