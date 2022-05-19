@@ -30,12 +30,6 @@ const IconCard = (props: IconCardProps) => {
             fontWeight='semibold'
             bg='none'
             color='#000'
-            _hover={{ bg: 'white', color: 'red.500', boxShadow: "base" }
-            }
-            _active={{
-                bg: 'gray.100', color: 'red.500',
-                boxShadow: "base"
-            }}
             display='flex'
             flexDirection='row'
             alignItems='center'
