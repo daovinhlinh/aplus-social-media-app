@@ -1,0 +1,25 @@
+.profile{
+    position: relative;
+    height: 100vh;
+    background: #f0efef;
+}
+.backgroundGprofile{
+    position: absolute;
+    width: 705px;
+    height: 337px;
+    left: 30%;
+    top: 10%;
+    border-radius: 20px;
+    overflow: hidden;
+
+}
+.mainprofileG{
+    position: absolute;
+    width: 705px;
+    height: 150px;
+    left: 30%;
+    top: 50%;
+
+    background: #FFFFFF;
+    border-radius: 25px;
+}
