@@ -68,13 +68,13 @@ const PageContainer = (props: any) => {
    return (
       <Flex className={styles.pagecontainer} width="100%" flexDirection="column">
          <Navbar />
-         <Flex width="100%">
+         <Flex width="100%" justifyContent='space-between'>
             <Box bg="rgba(250, 250, 251, 1)" boxShadow='base' width="20%" minWidth="300px" px="10px" py="30px" height='92vh'
                overflowY='scroll'
                overflowX='hidden'
                className={styles.feature}
             >
-               <HStack className={styles.detailcard} width='100%'>
+               <HStack className={styles.detailcard} width='100%' >
                   {
                      detailcards.map((item) => (
                         <DetailCard label1={item.title1} label2={item.title2} leftImg={item.img} rightIcon={item.icon} onClick={() => { }}
@@ -104,12 +104,12 @@ const PageContainer = (props: any) => {
                   ))
                }
             </Box>
-            <Box width={"50%"} px={10}>
+            <Box width={"50%"} flex={1} px={10} minWidth="450">
                {children}
             </Box>
-            <Box bg="rgba(250, 250, 251, 1)" boxShadow='base' width="20%" minWidth="300px" px="10px" py="30px" height='92vh'
+            <Box bg="rgba(250, 250, 251, 1)" display={['none', 'none', 'none', 'none', 'block']} boxShadow='base' width="20%" minWidth="300px" px="10px" py="30px" height='92vh'
                overflowY='scroll'
-               overflowX='hidden' display='none'
+               overflowX='hidden'
                className={styles.feature}
             >
                {
