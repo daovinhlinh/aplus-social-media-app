@@ -1,20 +1,27 @@
+import { Route, Routes } from 'react-router-dom';
 import "./App.css";
-import PostGroup from "./pages/Group/Post";
-import ProfileGroup from "./pages/Group/Profile";
-import ProfileGroupM from "./pages/Group/ProfileM";
+import Friendslist from './components/FriendsList';
+import FriendList from './pages/FriendList';
 import Login from "./pages/Login";
 import NewFeed from "./pages/NewFeed";
-import Usermanager from "./pages/UserManager/Usermanager";
+import NotFound from './pages/NotFound';
+import PhotoList from './pages/PhotoList';
+import PostList from './pages/PostList';
+import Profile from './pages/Profile';
 
 function App() {
     return (
         <div className="App">
-            {/* <Login /> */}
-            {/* <NewFeed /> */}
-            {/* <PostGroup/> */}
-            {/* <ProfileGroup/> */}
-            {/* <ProfileGroupM/> */}
-            <Usermanager/>
+            <Routes >
+                <Route path='/login' element={<Login />} />
+                <Route path='/' element={<NewFeed />} />
+                <Route path='/friend' element={<FriendList />} />
+                <Route path='/photo' element={<PhotoList />} />
+                <Route path='/profile' element={<Profile />} />
+                <Route path='*' element={<NotFound />} />
+                <Route path='/post' element={<PostList />} />
+
+            </Routes>
         </div>
     );
 }

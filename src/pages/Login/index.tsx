@@ -1,4 +1,5 @@
-import { Box, Button, Container, Divider, Flex, IconButton, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Box, Container, Divider, Flex, IconButton, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
 import Facebook from '../../assets/Icons/Facebook';
 import Google from '../../assets/Icons/Google';
 import Key from '../../assets/Icons/Key';
@@ -31,7 +32,9 @@ const Login = () => {
                         prefixIcons={[<Key />]}
                         mb={5}
                     />
-                    <CustomButton width="70%" text="Login" />
+                    <Link to={"/"}>
+                        <CustomButton width="70%" text="Login" />
+                    </Link>
                     <Container mt={4} mb={8}>
                         <Text as="span" color="gray.500" fontWeight="bold">Don't have an account? </Text>
                         <Text as="span" color="red.500" fontWeight="bold">Sign Up</Text>
