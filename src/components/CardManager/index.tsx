@@ -5,15 +5,18 @@ import React, { ReactChild } from "react";
 import People from "../../assets/Icons/People";
 
 interface IconCardProps {
-    leftIcon?: ReactChild;
+    img?: ReactChild;
     rightIcon?: ReactChild;
     label: string;
+    label1: string;
+    label2: string;
+    label3: string;
     onClick: () => void;
     [x: string]: any; //rest props
 }
 
 const CardManager = (props: IconCardProps) => {
-    const { leftIcon, rightIcon, label, label1,label2,label3, onClick, ...buttonStyle } = props;
+    const { img, rightIcon, label, label1, label2, label3, onClick, ...buttonStyle } = props;
 
     return (
         <HStack
@@ -24,13 +27,13 @@ const CardManager = (props: IconCardProps) => {
             transition='all 0.2s cubic-bezier(.08,.52,.52,1)'
             border='none'
             outline='none'
-            p='8px'
+            p='px'
             borderRadius='10px'
             fontSize='16px'
             fontWeight='semibold'
             bg='#FFFFFF'
             color='#000'
-            _hover={{ bg: 'rgba(226, 226, 226, 0.66)', color: 'red.500', boxShadow: "base" }
+            _hover={{ bg: 'rgba(226, 226, 226, 0.66)', boxShadow: "base" }
             }
             _active={{
                 bg: 'gray.100', color: 'red.500',
@@ -43,10 +46,10 @@ const CardManager = (props: IconCardProps) => {
             width='100%'
             {...buttonStyle}
         >
-            <Box>
-                {leftIcon}
+            <Box width="5%">
+                {img}
             </Box>
-            <Box>
+            <Box width="25%">
                 <Text
                     overflow="hidden"
                     textOverflow="ellipsis"
@@ -55,8 +58,8 @@ const CardManager = (props: IconCardProps) => {
                 >
                     {label}
                 </Text>
-            </Box>
-            <Box >
+            </Box >
+            <Box width="15%" px={10}>
                 <Text
                     overflow="hidden"
                     textOverflow="ellipsis"
@@ -66,7 +69,7 @@ const CardManager = (props: IconCardProps) => {
                     {label1}
                 </Text>
             </Box>
-            <Box>
+            <Box width="15%">
                 <Text
                     overflow="hidden"
                     textOverflow="ellipsis"
@@ -76,7 +79,7 @@ const CardManager = (props: IconCardProps) => {
                     {label2}
                 </Text>
             </Box>
-            <Box>
+            <Box width="15%" marginRight={10}>
                 <Text
                     overflow="hidden"
                     textOverflow="ellipsis"
@@ -86,7 +89,7 @@ const CardManager = (props: IconCardProps) => {
                     {label3}
                 </Text>
             </Box>
-            <Box>
+            <Box width="10%">
                 {rightIcon}
             </Box>
         </HStack >

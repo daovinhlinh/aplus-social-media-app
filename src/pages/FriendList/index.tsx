@@ -10,7 +10,6 @@ import DetailCard from "../../components/DetailCard";
 import FeedCard from "../../components/FeedCard";
 import Friendslist from "../../components/FriendsList";
 import IconCard from "../../components/IconCard";
-import MainProfile from "../../components/MainProfile";
 import Navbar from "../../components/NavBar";
 import PageContainer from "../../components/PageContainer";
 import styles from "./styles.module.scss";
@@ -19,23 +18,23 @@ import styles from "./styles.module.scss";
 
 const FriendList = () => {
 
-    
+
     return (
         <div className={styles.profile}>
-                
-                <PageContainer>
-                        <Box className={styles.backgroundprofile}>
-                            
-                            <BackgroundProfile />
-                            
-                        </Box>
-                        <Box className={styles.friendslist}>
-                           
-                            <Friendslist/>
-                            
-                        </Box>
-                </PageContainer>
-                
+
+            <PageContainer>
+                <Box className={styles.backgroundprofile}>
+
+                    <BackgroundProfile />
+
+                </Box>
+                <Box className={styles.friendslist}>
+
+                    <Friendslist />
+
+                </Box>
+            </PageContainer>
+
         </div>
     );
 };

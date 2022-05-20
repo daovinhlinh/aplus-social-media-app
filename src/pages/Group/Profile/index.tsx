@@ -1,4 +1,4 @@
-import { Box, Container, Flex, HStack, Spacer,Text } from "@chakra-ui/react";
+import { Box, Container, Flex, HStack, Spacer, Text } from "@chakra-ui/react";
 import React from "react";
 import People from "../../../assets/Icons/People";
 import Photo from "../../../assets/Icons/Photo";
@@ -11,23 +11,23 @@ import styles from "./styles.module.scss";
 import Setting from "../../../assets/Icons/Setting";
 import Logout from "../../../assets/Icons/Logout";
 import PageContainer from "../../../components/PageContainer";
-import MainProfileG from "../../../components/Mainprofile";
+import MainProfileG from "../../../components/MainprofileG";
 
 const ProfileGroup = () => {
-  
+
     return (
-        <PageContainer className = {styles.profile}>
+        <PageContainer className={styles.profile}>
             <Flex>
-            <Container>
-                <div className={styles.backgroundGprofile}>
-                    <BackgroundGProfile />
-                </div>
-            </Container>
-            <Container>
-                <div className={styles.mainprofileG}>
-                    <MainProfileG/>
-                </div>
-            </Container>
+                <Container>
+                    <div className={styles.backgroundGprofile}>
+                        <BackgroundGProfile />
+                    </div>
+                </Container>
+                <Container>
+                    <div className={styles.mainprofileG}>
+                        <MainProfileG />
+                    </div>
+                </Container>
             </Flex>
         </PageContainer>
     );
