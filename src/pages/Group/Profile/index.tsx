@@ -12,11 +12,12 @@ import Setting from "../../../assets/Icons/Setting";
 import Logout from "../../../assets/Icons/Logout";
 import PageContainer from "../../../components/PageContainer";
 import MainProfileG from "../../../components/MainprofileG";
+import PageContainerG from "../../../components/PageContainerG";
 
 const ProfileGroup = () => {
 
     return (
-        <PageContainer className={styles.profile}>
+        <PageContainerG className={styles.profile}>
             <Flex>
                 <Container>
                     <div className={styles.backgroundGprofile}>
@@ -29,7 +30,7 @@ const ProfileGroup = () => {
                     </div>
                 </Container>
             </Flex>
-        </PageContainer>
+        </PageContainerG>
     );
 };
 

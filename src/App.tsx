@@ -2,6 +2,8 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom';
 import "./App.css";
 import FriendList from './pages/FriendList';
+import Members from './pages/Group/Members';
+import PhotoListG from './pages/Group/Photos';
 import PostGroup from './pages/Group/Post';
 import ProfileGroup from './pages/Group/Profile';
 import ProfileGroupM from './pages/Group/ProfileM';
@@ -26,7 +28,8 @@ function App() {
                 <Route path='/postG' element={<PostGroup />} />
                 <Route path='/group' element={<ProfileGroup />} />
                 <Route path='/groupM' element={<ProfileGroupM />} />
-                <Route path='/post' element={<PostList />} />
+                <Route path='/photoG' element={<PhotoListG />} />
+                <Route path='/MemG' element={<Members />} />
                 <Route path='/UserMng' element={<Usermanager />} />
                 <Route path='*' element={<NotFound />} />
 

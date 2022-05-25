@@ -10,7 +10,7 @@ import Navbar from "../../../components/NavBar";
 import styles from "./styles.module.scss";
 import Setting from "../../../assets/Icons/Setting";
 import Logout from "../../../assets/Icons/Logout";
-import MainProfileG from "../../../components/Mainprofile";
+import MainProfileG from "../../../components/MainprofileG";
 import PageContainerM from "../../../components/PagecontainerM";
 import ManagerContainer from "../../../components/Manager";
 

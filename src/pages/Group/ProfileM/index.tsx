@@ -13,11 +13,12 @@ import Logout from "../../../assets/Icons/Logout";
 import PageContainer from "../../../components/PageContainer";
 import MainProfileG from "../../../components/MainprofileG";
 import BackgroundGMem from "../../../components/BackgroundGmem";
+import PageContainerG from "../../../components/PageContainerG";
 
 const ProfileGroupM = () => {
 
     return (
-        <PageContainer className={styles.profile}>
+        <PageContainerG className={styles.profile}>
             <Flex>
                 <Container display="flex" alignItems="center" justifyContent="space-between"
                 >
@@ -31,7 +32,7 @@ const ProfileGroupM = () => {
                     </div>
                 </Container>
             </Flex>
-        </PageContainer>
+        </PageContainerG>
     );
 };
 

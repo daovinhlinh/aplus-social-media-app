@@ -12,11 +12,12 @@ import Setting from "../../../assets/Icons/Setting";
 import Logout from "../../../assets/Icons/Logout";
 import PageContainer from "../../../components/PageContainer";
 import { TypeFlags } from "typescript";
+import PageContainerG from "../../../components/PageContainerG";
 
 const PostGroup = () => {
   
     return (
-        <PageContainer className = {styles.profile}>
+        <PageContainerG className = {styles.profile}>
             <Flex>
             <Container>
                 <div className={styles.backgroundGprofile}>
@@ -29,7 +30,7 @@ const PostGroup = () => {
                 </div>
             </Container>
             </Flex>
-        </PageContainer>
+        </PageContainerG>
     );
 };
 

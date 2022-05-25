@@ -6,14 +6,12 @@ import Photo from "../../assets/Icons/Photo";
 import Post from "../../assets/Icons/Post";
 import Video from "../../assets/Icons/Video";
 import BackgroundProfile from "../../components/BackgroundProfile";
-import DetailCard from "../../components/DetailCard";
-import FeedCard from "../../components/FeedCard";
 import Friendslist from "../../components/FriendsList";
-import IconCard from "../../components/IconCard";
+import MainProfile from "../../components/MainProfile";
 import Navbar from "../../components/NavBar";
 import PageContainer from "../../components/PageContainer";
 import styles from "./styles.module.scss";
-import MainProfile from "../../components/Mainprofile";
+
 
 
 
