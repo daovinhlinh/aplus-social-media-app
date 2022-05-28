@@ -23,17 +23,13 @@ import IconCard from "../IconCard";
 import PhotoCp from "../PhotoCp";
 import styles from "./styles.module.scss";
 
-
-
-
-const Postlist = (props :any) => {
+const Postlist = (props: any) => {
     return (
         <Flex className={styles.postlist} width="100%" flexDirection="row" >
-            <HStack width="100%" marginTop={10} borderRadius = {20}>
-                
-                <FeedCard/>
+            <HStack width="100%" marginTop={10} borderRadius={20}>
+                <FeedCard />
             </HStack>
-      </Flex>
+        </Flex>
     );
 };
 

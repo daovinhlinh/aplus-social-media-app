@@ -60,6 +60,7 @@ const featureList = [
    }
 ]
 
+
 const PageContainer = (props: any) => {
    const { children } = props;
    const navigate = useNavigate();
@@ -104,7 +105,7 @@ const PageContainer = (props: any) => {
                   ))
                }
             </Box>
-            <Box width={"50%"} flex={1} px={10} minWidth="450">
+            <Box width={"50%"} flex={1} px={10} py={5} minWidth="450" height="92vh" overflowY='scroll' overflowX={'hidden'}>
                {children}
             </Box>
             <Box bg="rgba(250, 250, 251, 1)" display={['none', 'none', 'none', 'none', 'block']} boxShadow='base' width="20%" minWidth="300px" px="10px" py="30px" height='92vh'
