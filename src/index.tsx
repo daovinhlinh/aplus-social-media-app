@@ -5,7 +5,6 @@ import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
 import { RecoilRoot } from 'recoil';
 import theme from './theme';
-import { ContextProvider } from './utils/SocketContext';
 import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
@@ -13,7 +12,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ContextProvider>
       <RecoilRoot>
         <ChakraProvider theme={theme}>
           <BrowserRouter>
@@ -21,6 +19,5 @@ root.render(
           </BrowserRouter>
         </ChakraProvider>
       </RecoilRoot>
-    </ContextProvider>
   </React.StrictMode>
 );

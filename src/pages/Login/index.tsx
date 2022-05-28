@@ -1,3 +1,4 @@
+import React from 'react'
 import { Box, Container, Divider, Flex, IconButton, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import { Link } from 'react-router-dom';
 import Facebook from '../../assets/Icons/Facebook';
@@ -12,7 +13,7 @@ const Login = () => {
     return (
         <div className={styles.login}>
             <Flex h="70%" minW="800px" w="70%" borderRadius={20} overflow="hidden" boxShadow='xl'>
-                <Box display="flex" flexDirection="column" bg="white" justifyContent="center" alignItems="center" w="50%" px={5}>
+                <Box display="flex" flexDirection="column" bg="white" justifyContent="center" alignItems="center" minHeight="500" w="50%" px={5}>
                     <Text fontSize="2xl" fontWeight="bold">Welcome to</Text>
                     <Text color="red.500" fontSize="5xl" fontWeight="bold">
                         A Plus
