@@ -1,28 +1,29 @@
-import { Box, Container, Flex, HStack, Spacer,Text } from "@chakra-ui/react";
 import React from "react";
-import People from "../../../assets/Icons/People";
-import Photo from "../../../assets/Icons/Photo";
-import BackgroundGProfile from "../../../components/BackgoundprofileG";
-import DetailCard from "../../../components/DetailCard";
-import FeedCard from "../../../components/FeedCard";
-import IconCard from "../../../components/IconCard";
-import Navbar from "../../../components/NavBar";
-import styles from "./styles.module.scss";
-import Setting from "../../../assets/Icons/Setting";
-import Logout from "../../../assets/Icons/Logout";
-import MainProfileG from "../../../components/MainprofileG";
-import PageContainerM from "../../../components/PagecontainerM";
-import ManagerContainer from "../../../components/Manager";
+import Friends from "../../../assets/Icons/Friends";
+import IconProfile from "../../../assets/Icons/IconProfile";
+import Post from "../../../assets/Icons/Post";
+import ManagerContainer from "../../../components/ManagerContainer";
+import PageContainer from "../../../components/PageContainer";
 
 const Usermanager = () => {
-  
-    return (
-        <PageContainerM>
-            
-            <ManagerContainer/>
-            
-        </PageContainerM>
-    );
+   const featureList = [
+      {
+         title: "Profile",
+         icon: <IconProfile />,
+         link: "/profile",
+      },
+      {
+         title: "Post",
+         icon: <Post />,
+         link: "/post",
+      },
+   ];
+
+   return (
+      <PageContainer isAdmin={true} featureList={featureList}>
+         <ManagerContainer />
+      </PageContainer>
+   );
 };
 
 export default Usermanager;

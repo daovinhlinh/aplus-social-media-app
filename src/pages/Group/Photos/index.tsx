@@ -1,33 +1,23 @@
-import { Container, Flex, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
+import BackgroundGProfile from "../../../components/BackgoundprofileG";
+import PageContainer from "../../../components/PageContainer";
 import Photoslist from "../../../components/PhotosList";
 import styles from "./styles.module.scss";
-import PageContainerG from "../../../components/PageContainerG";
-import BackgroundGProfile from "../../../components/BackgoundprofileG";
-
-
 
 const PhotoListG = () => {
-
-
-    return (
-        <div className={styles.profile}>
-
-            <PageContainerG>
-                <Box className={styles.backgroundGprofile}>
-
-                    <BackgroundGProfile />
-
-                </Box>
-                <Box className={styles.PhotoListG}>
-
-                    <Photoslist />
-
-                </Box>
-            </PageContainerG>
-
-        </div>
-    );
+   return (
+      <div className={styles.profile}>
+         <PageContainer>
+            <Box className={styles.backgroundGprofile}>
+               <BackgroundGProfile />
+            </Box>
+            <Box className={styles.PhotoListG}>
+               <Photoslist />
+            </Box>
+         </PageContainer>
+      </div>
+   );
 };
 
 export default PhotoListG;

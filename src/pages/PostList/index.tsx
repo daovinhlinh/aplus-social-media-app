@@ -30,11 +30,11 @@ const PhotoList = () => {
                     <BackgroundProfile />
 
                 </Box>
-                <Box className={styles.friendslist}>
+                {/* <Box className={styles.friendslist}>
 
                     <Postlist />
 
-                </Box>
+                </Box> */}
             </PageContainer>
 
         </div>
