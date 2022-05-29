@@ -9,7 +9,10 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import ButtonEdit from "../ButtonEdit";
+import CustomButton from "../CustomButton";
+
 const BackgroundProfile = (props: any) => {
+
    return (
       <Box
          width={"100%"}
@@ -57,7 +60,7 @@ const BackgroundProfile = (props: any) => {
                      Description
                   </Text>
                </Box>
-               <ButtonEdit />
+               <ButtonEdit/>
             </Box>
          </Box>
          <Spacer />

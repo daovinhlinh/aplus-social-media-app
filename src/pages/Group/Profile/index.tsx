@@ -1,26 +1,60 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Box, Container, Flex } from "@chakra-ui/react";
 import React from "react";
-import BackgroundGProfile from "../../../components/BackgoundprofileG";
+import IconProfile from "../../../assets/Icons/IconProfile";
 import MainProfileG from "../../../components/MainprofileG";
 import PageContainer from "../../../components/PageContainer";
 import styles from "./styles.module.scss";
+import Post from "../../../assets/Icons/Post";
+import BackgroundProfile from "../../../components/BackgroundProfile";
+import Friends from "../../../assets/Icons/Friends";
+import Photo from "../../../assets/Icons/Photo";
+import Video from "../../../assets/Icons/Video";
 
 const ProfileGroup = () => {
+   const featureList = [
+      {
+         title: "Profile",
+         icon: <IconProfile />,
+         link: "/group",
+      },
+      {
+         title: "Post",
+         icon: <Post />,
+         link: "/postG",
+      },
+      {
+         title: "Members",
+         icon: <Friends />,
+         link: "/friendG",
+      },
+      {
+         title: "Photos",
+         icon: <Photo />,
+         link: "/photo",
+      },
+      {
+         title: "Videos",
+         icon: <Video />,
+         link: "/video",
+      },
+   ];
    return (
-      <PageContainer className={styles.profile}>
-         <Flex>
-            <Container>
+      <div className={styles.profile} >
+      <PageContainer isAdmin={true} featureList={featureList}>
+         
+            <Box>
                <div className={styles.backgroundGprofile}>
-                  <BackgroundGProfile />
+                  <BackgroundProfile />
                </div>
-            </Container>
-            <Container>
+            </Box>
+            <Box>
                <div className={styles.mainprofileG}>
                   <MainProfileG />
                </div>
-            </Container>
-         </Flex>
+            </Box>
+         
       </PageContainer>
+      </div>
    );
 };
 

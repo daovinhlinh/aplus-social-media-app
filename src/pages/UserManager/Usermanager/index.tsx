@@ -8,14 +8,19 @@ import PageContainer from "../../../components/PageContainer";
 const Usermanager = () => {
    const featureList = [
       {
-         title: "Profile",
+         title: "User Management",
          icon: <IconProfile />,
          link: "/profile",
       },
       {
-         title: "Post",
+         title: "Post Management",
          icon: <Post />,
          link: "/post",
+      },
+      {
+         title: "Reports",
+         icon: <Friends />,
+         link: "",
       },
    ];
 
