@@ -3,9 +3,9 @@
 }
 
 .tab:active { 
-   box-shadow: "none",
+   box-shadow: none !important;
 }
 
 .tab:focus { 
-   box-shadow: "none",
+   box-shadow: none !important;
 }

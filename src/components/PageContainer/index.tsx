@@ -16,22 +16,21 @@ import IconCard from "../IconCard";
 import Navbar from "../NavBar";
 import styles from "./styles.module.scss";
 
-const detailcards = [
-   {
-      title1: "Hồng Anh Amie",
-      title2: "Trap Girl",
-      img: (
-         <Image
-            src="https://scontent.fhan11-1.fna.fbcdn.net/v/t31.18172-8/26841225_744862592376172_998804515399431440_o.jpg?_nc_cat=105&ccb=1-6&_nc_sid=174925&_nc_ohc=Ckvxss-PJRoAX9aghkw&_nc_ht=scontent.fhan11-1.fna&oh=00_AT_Ee3hxiRkntw7aXCgRvyBBrdmPOLxrOuh-n-9gSm35Hw&oe=62A82296"
-            height={50}
-            width={50}
-            borderRadius={100}
-            marginRight={3}
-         />
-      ),
-      icon: <Options />,
-   },
-];
+const detailcards = {
+   title1: "Hồng Anh Amie",
+   title2: "Trap Girl",
+   img: (
+      <Image
+         src="https://scontent.fhan11-1.fna.fbcdn.net/v/t31.18172-8/26841225_744862592376172_998804515399431440_o.jpg?_nc_cat=105&ccb=1-6&_nc_sid=174925&_nc_ohc=Ckvxss-PJRoAX9aghkw&_nc_ht=scontent.fhan11-1.fna&oh=00_AT_Ee3hxiRkntw7aXCgRvyBBrdmPOLxrOuh-n-9gSm35Hw&oe=62A82296"
+         height={50}
+         width={50}
+         borderRadius={100}
+         marginRight={3}
+      />
+   ),
+   icon: <Options />,
+};
+
 const userFeatureList = [
    {
       title: "Profile",
@@ -82,45 +81,31 @@ const PageContainer = (props: any) => {
                height="92vh"
                overflowY="scroll"
                overflowX="hidden"
+               margin="auto 0"
                className={styles.feature}
             >
-               <HStack className={styles.detailcard} width="100%">
-                  {detailcards.map((item) => (
-                     <DetailCard
-                        label1={item.title1}
-                        label2={item.title2}
-                        leftImg={item.img}
-                        rightIcon={item.icon}
-                        onClick={() => {}}
-                        _hover={{
-                           bg: "white",
-                           color: "red.500",
-                           boxShadow: "base",
-                        }}
-                        _active={{
-                           bg: "gray.100",
-                           color: "red.500",
-                           boxShadow: "base",
-                        }}
-                     />
-                  ))}
-               </HStack>
+               <DetailCard
+                  label1={detailcards.title1}
+                  label2={detailcards.title2}
+                  leftImg={detailcards.img}
+                  onClick={() => {}}
+                  _hover={{
+                     bg: "white",
+                     color: "red.500",
+                     boxShadow: "base",
+                  }}
+                  _active={{
+                     bg: "gray.100",
+                     color: "red.500",
+                     boxShadow: "base",
+                  }}
+               />
                {(isAdmin ? featureList : userFeatureList).map((item) => (
                   <IconCard
                      label={item.title}
                      leftIcon={item.icon}
                      onClick={() => {
                         navigate(item.link);
-                     }}
-                     _hover={{
-                        bg: "white",
-                        color: "red.500",
-                        boxShadow: "base",
-                     }}
-                     _active={{
-                        bg: "gray.100",
-                        color: "red.500",
-                        boxShadow: "base",
                      }}
                   />
                ))}

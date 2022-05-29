@@ -14,29 +14,19 @@ import Navbar from "../../components/NavBar";
 import PageContainer from "../../components/PageContainer";
 import styles from "./styles.module.scss";
 
-
-
 const FriendList = () => {
-
-
-    return (
-        <div className={styles.profile}>
-
-            <PageContainer>
-                <Box className={styles.backgroundprofile}>
-
-                    <BackgroundProfile />
-
-                </Box>
-                <Box className={styles.friendslist}>
-
-                    <Friendslist />
-
-                </Box>
-            </PageContainer>
-
-        </div>
-    );
+   return (
+      <div className={styles.profile}>
+         <PageContainer>
+            <Box className={styles.backgroundprofile}>
+               <BackgroundProfile />
+            </Box>
+            <Box className={styles.friendslist}>
+               <Friendslist />
+            </Box>
+         </PageContainer>
+      </div>
+   );
 };
 
 export default FriendList;
