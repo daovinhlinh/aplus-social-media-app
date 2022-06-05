@@ -3,7 +3,7 @@ import React, { ReactChild } from "react";
 import People from "../../assets/Icons/People";
 
 interface IconCardProps {
-   leftIcon?: ReactChild;
+   leftIcon: ReactChild;
    rightIcon?: ReactChild;
    label: string;
    onClick: () => void;
@@ -49,6 +49,7 @@ const IconCard = (props: IconCardProps) => {
                textOverflow="ellipsis"
                whiteSpace="nowrap"
                textAlign="left"
+               color={isActive ? 'red.500' : '#9D9D9D'}
             >
                {label}
             </Text>

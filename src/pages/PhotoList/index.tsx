@@ -18,7 +18,7 @@ import styles from "./styles.module.scss";
 const PhotoList = () => {
    return (
       <div className={styles.profile}>
-         <PageContainer>
+         <PageContainer page="Photos">
             <Box className={styles.backgroundprofile}>
                <BackgroundProfile />
             </Box>

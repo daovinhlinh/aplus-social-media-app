@@ -1,5 +1,7 @@
-import { Box, HStack, Spacer, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverTrigger, Portal, Spacer, Text } from "@chakra-ui/react";
 import React, { ReactChild } from "react";
+import Edit from "../../assets/Icons/Edit";
+import Pen from "../../assets/Icons/Pen";
 
 interface DetailCardProps {
    leftImg?: ReactChild;
@@ -25,7 +27,19 @@ const DetailCard = (props: DetailCardProps) => {
             </Text>
          </Box>
          <Spacer />
-         <Box>{rightIcon}</Box>
+         <Popover offset={[-60, -10]}>
+            <PopoverTrigger>
+               <Button bg='transparent' variant='unstyled' _expanded={{ boxShadow: 'none' }} _focus={{ boxShadow: 'none' }}>{rightIcon}</Button>
+            </PopoverTrigger>
+            <Portal border="none" >
+               <PopoverContent border="none" _focus={{ boxShadow: 'none' }} width='fit-content'>
+                  <PopoverBody>
+                     {/* <Button colorScheme='blue'>{rightIcon}</Button> */}
+                     <Button bg='none' _hover={{ bg: 'none' }} leftIcon={<Edit />}>Chỉnh sửa bài viết</Button>
+                  </PopoverBody>
+               </PopoverContent>
+            </Portal>
+         </Popover>
       </HStack>
    );
 };

@@ -1,6 +1,6 @@
 import { Box, Container, Flex, HStack, Image } from "@chakra-ui/react";
 import { NOTIMP } from "dns";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Friends from "../../assets/Icons/Friends";
 import IconProfile from "../../assets/Icons/IconProfile";
@@ -33,14 +33,14 @@ const detailcards = {
 
 const userFeatureList = [
    {
-      title: "Profile",
-      icon: <IconProfile />,
-      link: "/profile",
-   },
-   {
       title: "Post",
       icon: <Post />,
       link: "/post",
+   },
+   {
+      title: "Profile",
+      icon: <IconProfile />,
+      link: "/profile",
    },
    {
       title: "Friends",
@@ -60,7 +60,7 @@ const userFeatureList = [
 ];
 
 const PageContainer = (props: any) => {
-   const { isAdmin, children, featureList } = props;
+   const { isAdmin, children, featureList, page } = props;
    const navigate = useNavigate();
 
    return (
@@ -74,7 +74,7 @@ const PageContainer = (props: any) => {
             <Box
                bg="rgba(250, 250, 251, 1)"
                boxShadow="base"
-               width="20%"
+               width="25%"
                minWidth="300px"
                px="10px"
                py="30px"
@@ -88,7 +88,7 @@ const PageContainer = (props: any) => {
                   label1={detailcards.title1}
                   label2={detailcards.title2}
                   leftImg={detailcards.img}
-                  onClick={() => {}}
+                  onClick={() => { }}
                   _hover={{
                      bg: "white",
                      color: "red.500",
@@ -102,16 +102,18 @@ const PageContainer = (props: any) => {
                />
                {(isAdmin ? featureList : userFeatureList).map((item) => (
                   <IconCard
+                     isActive={page === item.title}
                      label={item.title}
                      leftIcon={item.icon}
                      onClick={() => {
+                        // setActiveTab(item.title);
                         navigate(item.link);
                      }}
                   />
                ))}
             </Box>
             <Box
-               width={isAdmin ? "70%" : "50%"}
+               width={isAdmin ? "60%" : "40%"}
                flex={1}
                px={10}
                py={5}
@@ -128,7 +130,7 @@ const PageContainer = (props: any) => {
                   bg="rgba(250, 250, 251, 1)"
                   display={["none", "none", "none", "none", "block"]}
                   boxShadow="base"
-                  width="20%"
+                  width="25%"
                   minWidth="300px"
                   px="10px"
                   py="30px"
@@ -137,8 +139,9 @@ const PageContainer = (props: any) => {
                   overflowX="hidden"
                   className={styles.feature}
                >
-                  {userFeatureList.map((item) => (
+                  {userFeatureList.map((item, index) => (
                      <IconCard
+                        // isActive={activeTab === index}
                         label={item.title}
                         leftIcon={item.icon}
                         onClick={() => {

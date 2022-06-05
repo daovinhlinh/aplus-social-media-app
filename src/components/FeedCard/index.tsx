@@ -30,12 +30,6 @@ const FeedCard = () => {
             {
                detailcards.map((item) => (
                   <DetailCard label1={item.title1} label2={item.title2} leftImg={item.img} rightIcon={item.icon} onClick={() => { }}
-                     _hover={{ bg: 'white', color: 'red.500', boxShadow: "base" }
-                     }
-                     _active={{
-                        bg: 'gray.100', color: 'red.500',
-                        boxShadow: "base"
-                     }}
                   />
                )
                )

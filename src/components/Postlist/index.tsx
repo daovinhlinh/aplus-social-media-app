@@ -1,26 +1,8 @@
 import {
-    Box,
-    Container,
-    HStack,
-    Image,
-    Spacer,
-    Text,
-    VStack,
-    Button,
-    Flex,
-    Img,
+    Flex, HStack
 } from "@chakra-ui/react";
 import React from "react";
-import Home from "../../assets/Icons/Home";
-import Options from "../../assets/Icons/Options";
-import Place from "../../assets/Icons/Place";
-import Study from "../../assets/Icons/Study";
-import WhiteOptions from "../../assets/Icons/WhiteOptions";
-import ButtonEdit from "../ButtonEdit";
-import DetailCard from "../DetailCard";
 import FeedCard from "../FeedCard";
-import IconCard from "../IconCard";
-import PhotoCp from "../PhotoCp";
 import styles from "./styles.module.scss";
 
 const Postlist = (props: any) => {

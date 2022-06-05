@@ -5,10 +5,10 @@ import PageContainer from "../../components/PageContainer";
 import Postlist from "../../components/Postlist";
 import styles from "./styles.module.scss";
 
-const PhotoList = () => {
+const PostList = () => {
    return (
       <div className={styles.profile}>
-         <PageContainer>
+         <PageContainer page='Post'>
             <Box className={styles.backgroundprofile}>
                <BackgroundProfile />
             </Box>
@@ -20,4 +20,4 @@ const PhotoList = () => {
    );
 };
 
-export default PhotoList;
+export default PostList;

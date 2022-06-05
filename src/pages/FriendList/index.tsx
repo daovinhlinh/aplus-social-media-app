@@ -17,7 +17,7 @@ import styles from "./styles.module.scss";
 const FriendList = () => {
    return (
       <div className={styles.profile}>
-         <PageContainer>
+         <PageContainer page='Friends'>
             <Box className={styles.backgroundprofile}>
                <BackgroundProfile />
             </Box>
