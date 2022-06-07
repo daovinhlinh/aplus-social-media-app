@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.0.1",
     "@types/react-router-dom": "^5.3.3",
     "@types/simple-peer": "^9.11.4",
+    "axios": "^0.27.2",
     "file-loader": "^6.2.0",
     "framer-motion": "^6.3.3",
     "keyframes": "^2.3.0",
