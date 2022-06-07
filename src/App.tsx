@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import PhotoList from "./pages/PhotoList";
 import PostList from "./pages/PostList";
 import Profile from "./pages/Profile";
+import Register from "./pages/Register";
 import Usermanager from "./pages/UserManager/Usermanager";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
          <Routes>
             <Route path="/" element={<NewFeed />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/friend" element={<FriendList />} />
             <Route path="/photo" element={<PhotoList />} />
             <Route path="/profile" element={<Profile />} />
