@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
    Box,
+   Button,
    Container,
    Divider,
    Flex,
+   FormControl,
+   FormLabel,
    IconButton,
+   Input,
    Text,
+   useToast,
    Wrap,
    WrapItem,
 } from "@chakra-ui/react";
@@ -18,6 +23,7 @@ import CustomButton from "../../components/CustomButton";
 import InputField, { Variant } from "../../components/InputField";
 import styles from "./styles.module.scss";
 import { axiosClient } from "../../utils/axiosClient";
+import MessageBox from "../../components/MessageBox";
 
 const Register = () => {
    const [username, setUsername] = useState("");
@@ -25,6 +31,7 @@ const Register = () => {
    const [password, setPassword] = useState("");
    const [password2, setPassword2] = useState("");
    const [matchPassword, setMatchPassword] = useState(false);
+   const [error, setError] = useState("");
 
    useEffect(() => {
       if (password !== password2) {
@@ -34,7 +41,9 @@ const Register = () => {
       }
    }, [password2]);
 
-   const handleSubmit = async () => {
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+
       const submitForm = {
          username,
          email,
@@ -42,8 +51,8 @@ const Register = () => {
       };
 
       const res = await axiosClient.post("auth/register", submitForm);
-      const data = await res.json();
-      console.log(data);
+
+      console.log(res);
    };
 
    return (
@@ -72,7 +81,7 @@ const Register = () => {
                <Text color="red.500" fontSize="5xl" fontWeight="bold">
                   A Plus
                </Text>
-               <InputField
+               {/* <InputField
                   width="70%"
                   placeholder="User name"
                   variant={Variant.outline}
@@ -112,10 +121,47 @@ const Register = () => {
                   <Text color="red.400" mb={5}>
                      Password does not match
                   </Text>
-               )}
-
-               <CustomButton text="Sign up" onClick={handleSubmit} />
-
+               )} */}
+               <form onSubmit={handleSubmit}>
+                  {error && <MessageBox status="error" message={error} />}
+                  <FormControl isRequired w="300px">
+                     <FormLabel>Username</FormLabel>
+                     <Input onChange={(e) => setUsername(e.target.value)} />
+                  </FormControl>
+                  <FormControl mt={3} isRequired w="300px">
+                     <FormLabel>Email</FormLabel>
+                     <Input
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        placeholder="test@test.com"
+                     />
+                  </FormControl>
+                  <FormControl mt={3} isRequired w="300px">
+                     <FormLabel>Password</FormLabel>
+                     <Input
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
+                        placeholder="******"
+                     />
+                  </FormControl>
+                  <FormControl mt={3} isRequired w="300px">
+                     <FormLabel>Confirm Password</FormLabel>
+                     <Input
+                        onChange={(e) => setPassword2(e.target.value)}
+                        type="password"
+                        placeholder="******"
+                     />
+                  </FormControl>
+                  <Button
+                     width="full"
+                     backgroundColor="red.500"
+                     color="#fff"
+                     mt={4}
+                     type="submit"
+                  >
+                     Sign Up
+                  </Button>
+               </form>
                <Container mt={4} mb={8}>
                   <Text as="span" color="gray.500" fontWeight="bold">
                      Already have an account?

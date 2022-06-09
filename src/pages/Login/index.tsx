@@ -1,37 +1,52 @@
-import React, { useState } from "react";
 import {
    Box,
+   Button,
    Container,
-   Divider,
    Flex,
-   IconButton,
-   Spacer,
+   FormControl,
+   FormLabel,
+   Input,
    Text,
-   Wrap,
-   WrapItem,
+   useToast,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import Facebook from "../../assets/Icons/Facebook";
-import Google from "../../assets/Icons/Google";
-import Key from "../../assets/Icons/Key";
-import People from "../../assets/Icons/People";
-import CustomButton from "../../components/CustomButton";
-import InputField, { Variant } from "../../components/InputField";
-import styles from "./styles.module.scss";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import MessageBox from "../../components/MessageBox";
+import { AuthContext } from "../../context/authContext";
+import { userDataState } from "../../store/user";
 import { axiosClient } from "../../utils/axiosClient";
+import styles from "./styles.module.scss";
 
 const Login = () => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
+   const [loading, setLoading] = useState(false);
+   const [error, setError] = useState("");
+   const setUserData = useSetRecoilState(userDataState);
+   const navigate = useNavigate();
+   const isError = email === "";
 
-   const handleSubmit = async () => {
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+
       const submitForm = {
          email,
          password,
       };
 
       const res = await axiosClient.post("auth/login", submitForm);
-      console.log(res);
+
+      if (res.status === 200) {
+         setLoading(false);
+         setUserData(res.data);
+         navigate("/");
+         console.log(res);
+      } else {
+         setLoading(false);
+         setError(res as unknown as string);
+      }
 
       //   const data = await res.json();
       //   console.log(data);
@@ -62,26 +77,34 @@ const Login = () => {
                <Text color="red.500" fontSize="5xl" fontWeight="bold">
                   A Plus
                </Text>
-               <InputField
-                  width="70%"
-                  placeholder="Email"
-                  variant={Variant.outline}
-                  prefixIcons={[<People />]}
-                  onChange={setEmail}
-                  mb={3}
-                  mt={10}
-               />
-               <InputField
-                  width="70%"
-                  placeholder="Password"
-                  variant={Variant.outline}
-                  prefixIcons={[<Key />]}
-                  onChange={setPassword}
-                  mb={3}
-                  type="password"
-               />
-
-               <CustomButton text="Login" onClick={handleSubmit} />
+               <form onSubmit={handleSubmit}>
+                  {error && <MessageBox status="error" message={error} />}
+                  <FormControl isRequired w="300px">
+                     <FormLabel>Email</FormLabel>
+                     <Input
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        placeholder="test@test.com"
+                     />
+                  </FormControl>
+                  <FormControl mt={3} isRequired w="300px">
+                     <FormLabel>Password</FormLabel>
+                     <Input
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
+                        placeholder="******"
+                     />
+                  </FormControl>
+                  <Button
+                     width="full"
+                     backgroundColor="red.500"
+                     color="#fff"
+                     mt={4}
+                     type="submit"
+                  >
+                     Sign In
+                  </Button>
+               </form>
 
                <Container mt={4} mb={8}>
                   <Text as="span" color="gray.500" fontWeight="bold">
