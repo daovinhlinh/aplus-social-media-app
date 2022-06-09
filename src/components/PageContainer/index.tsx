@@ -1,17 +1,15 @@
-import { Box, Container, Flex, HStack, Image } from "@chakra-ui/react";
-import { NOTIMP } from "dns";
-import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Box, Flex, Image } from "@chakra-ui/react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import Friends from "../../assets/Icons/Friends";
 import IconProfile from "../../assets/Icons/IconProfile";
 import Options from "../../assets/Icons/Options";
-import People from "../../assets/Icons/People";
 import Photo from "../../assets/Icons/Photo";
 import Post from "../../assets/Icons/Post";
 import Video from "../../assets/Icons/Video";
-import FriendList from "../../pages/FriendList";
+import { userDataState } from "../../store/user";
 import DetailCard from "../DetailCard";
-import FeedCard from "../FeedCard";
 import IconCard from "../IconCard";
 import Navbar from "../NavBar";
 import styles from "./styles.module.scss";
@@ -61,7 +59,12 @@ const userFeatureList = [
 
 const PageContainer = (props: any) => {
    const { isAdmin, children, featureList, page } = props;
+   const userData = useRecoilValue(userDataState);
    const navigate = useNavigate();
+
+   if (!userData) {
+      return <div>Loading</div>;
+   }
 
    return (
       <Flex
@@ -85,10 +88,10 @@ const PageContainer = (props: any) => {
                className={styles.feature}
             >
                <DetailCard
-                  label1={detailcards.title1}
-                  label2={detailcards.title2}
+                  label1={userData.username}
+                  label2={userData.email}
                   leftImg={detailcards.img}
-                  onClick={() => { }}
+                  onClick={() => {}}
                   _hover={{
                      bg: "white",
                      color: "red.500",
