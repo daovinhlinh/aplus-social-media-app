@@ -89,6 +89,9 @@ const InputField = (props: IInputField) => {
                            lineHeight: 0,
                            minWidth: 0,
                         }}
+                        _focus={{
+                           boxShadow: "none",
+                        }}
                         variant="unstyled"
                         aria-label="icon"
                         icon={item.icon}
