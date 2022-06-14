@@ -1,16 +1,24 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Button } from "@chakra-ui/react";
 
 interface ICustomButton {
    width?: string;
    colorScheme?: string;
    color?: string;
-   text: string;
+   children: ReactElement;
+   leftIcon?: ReactElement;
    onClick: (e: any) => void;
 }
 
 const CustomButton = (props: ICustomButton) => {
-   const { width, colorScheme = "red", color = "white", text, onClick } = props;
+   const {
+      width,
+      colorScheme = "red",
+      color = "white",
+      children,
+      leftIcon,
+      onClick,
+   } = props;
 
    return (
       <Button
@@ -19,8 +27,13 @@ const CustomButton = (props: ICustomButton) => {
          borderRadius={5}
          color={color}
          onClick={onClick}
+         bg="transparent"
+         variant="unstyled"
+         _expanded={{ boxShadow: "none" }}
+         _focus={{ boxShadow: "none" }}
+         leftIcon={leftIcon}
       >
-         {text}
+         {children}
       </Button>
    );
 };
