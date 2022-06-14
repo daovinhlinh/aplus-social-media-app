@@ -17,6 +17,8 @@ const NewFeed = () => {
    const userData = useRecoilValue(userDataState);
    const fetchFeed = useRecoilValue(getFeed);
    const [img, setImg] = useState(null);
+   console.log(fetchFeed);
+   
 
    const handlePost = async () => {
       const submitPost = {
@@ -49,11 +51,13 @@ const NewFeed = () => {
    //    console.log(feedData);
    // }, [feedData]);
 
-   console.log(fetchFeed);
-
+ 
    return (
       <React.Suspense fallback={<div>Loading...</div>}>
          <PageContainer page="Post">
+          {
+             fetchFeed.length > 0 &&
+            <>
             <Box
                width={"100%"}
                bgColor="#FFF"
@@ -62,6 +66,7 @@ const NewFeed = () => {
                borderRadius="15px"
                mb="40px"
             >
+              
                <Text textAlign="left" color="black" fontWeight={600} mb="29px">
                   Post something
                </Text>
@@ -97,6 +102,8 @@ const NewFeed = () => {
                   );
                })}
             </Box>
+            </>
+            }
          </PageContainer>
       </React.Suspense>
    );
