@@ -39,6 +39,7 @@ const Login = () => {
       const res = await axiosClient.post("auth/login", submitForm);
 
       if (res.status === 200) {
+         localStorage.setItem("userData", JSON.stringify(res.data));
          setLoading(false);
          setUserData(res.data);
          navigate("/");

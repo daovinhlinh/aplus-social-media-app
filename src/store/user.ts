@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
-const USER_DATA = 'userData';
+const USER_DATA = "userData";
 
 interface UserData {
    _id: string;
@@ -19,7 +19,7 @@ interface UserData {
 
 const userDataState = atom({
    key: USER_DATA,
-   default: null as UserData
-})
+   default: null as UserData,
+});
 
-export { userDataState }
+export { userDataState };
