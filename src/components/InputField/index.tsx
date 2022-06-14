@@ -23,7 +23,7 @@ interface IInputField {
    placeholder?: string;
    width?: string;
    type?: string;
-   onChange: (e: string) => void;
+   onChange: (text: string) => void;
    [x: string]: any; //rest props
 }
 
