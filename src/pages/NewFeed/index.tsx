@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Photo from "../../assets/Icons/Photo";
 import Send from "../../assets/Icons/Send";
-import FeedCard from "../../components/FeedCard";
+import FeedCard, { IFeed } from "../../components/FeedCard";
 import InputField from "../../components/InputField";
 import PageContainer from "../../components/PageContainer";
 import { getFeed } from "../../store/feed";
@@ -15,10 +15,8 @@ const NewFeed = () => {
    const [posts, setPosts] = useState([]);
    const [postText, setPostText] = useState("");
    const userData = useRecoilValue(userDataState);
-   const fetchFeed = useRecoilValue(getFeed);
+   const feedList = useRecoilValue<IFeed[]>(getFeed);
    const [img, setImg] = useState(null);
-   console.log(fetchFeed);
-   
 
    const handlePost = async () => {
       const submitPost = {
@@ -35,7 +33,10 @@ const NewFeed = () => {
 
          await axiosClient.post("upload", form);
       }
-      await axiosClient.post("post", submitPost);
+
+      if (postText) { 
+         await axiosClient.post("post", submitPost);
+      }
    };
 
    // useEffect(() => {
@@ -50,13 +51,12 @@ const NewFeed = () => {
    // useEffect(() => {
    //    console.log(feedData);
    // }, [feedData]);
-
  
    return (
       <React.Suspense fallback={<div>Loading...</div>}>
          <PageContainer page="Post">
           {
-             fetchFeed.length > 0 &&
+             feedList.length > 0 &&
             <>
             <Box
                width={"100%"}
@@ -66,7 +66,6 @@ const NewFeed = () => {
                borderRadius="15px"
                mb="40px"
             >
-              
                <Text textAlign="left" color="black" fontWeight={600} mb="29px">
                   Post something
                </Text>
@@ -89,18 +88,18 @@ const NewFeed = () => {
                />
             </Box>
             <Box>
-               {fetchFeed.map((feed) => {
+               {feedList.map((feed: IFeed) => {
                   const { _id, userId, desc, likes, createdAt } = feed;
                   return (
                      <FeedCard
                         desc={desc}
-                        id={_id}
-                        like={likes}
+                        _id={_id}
+                        likes={likes}
                         createdAt={createdAt}
                         userId={userId}
                      />
                   );
-               })}
+               }).reverse()}
             </Box>
             </>
             }
