@@ -32,6 +32,7 @@ const CustomButton = (props: ICustomButton) => {
          _expanded={{ boxShadow: "none" }}
          _focus={{ boxShadow: "none" }}
          leftIcon={leftIcon}
+         display='flex'
       >
          {children}
       </Button>
