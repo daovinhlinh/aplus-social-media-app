@@ -74,7 +74,7 @@ const NewFeed = () => {
                   suffixIcons={[
                      {
                         icon: <Photo />,
-                        onPress: () => {},
+                        onPress: () => { },
                      },
                      {
                         icon: <Send />,
@@ -90,13 +90,13 @@ const NewFeed = () => {
             </Box>
             <Box>
                {fetchFeed.map((feed) => {
-                  const { _id, userId, desc, likes, createAt } = feed;
+                  const { _id, userId, desc, likes, createdAt } = feed;
                   return (
                      <FeedCard
                         desc={desc}
                         id={_id}
                         like={likes}
-                        createAt={createAt}
+                        createdAt={createdAt}
                         userId={userId}
                      />
                   );

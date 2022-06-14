@@ -15,32 +15,20 @@ import Options from "../../assets/Icons/Options";
 import Share from "../../assets/Icons/Share";
 import { userDataState } from "../../store/user";
 import { axiosClient } from "../../utils/axiosClient";
+import { convertToDateTime } from "../../utils/datetime";
 import CustomButton from "../CustomButton";
 import DetailCard from "../DetailCard";
 import InputField from "../InputField";
 import styles from "./styles.module.scss";
 
-const detailcards = [
-   {
-      title1: "Dao vinh ling",
-      title2: "buck foiz",
-      img: (
-         <Image
-            src="https://scontent.fhan11-1.fna.fbcdn.net/v/t31.18172-8/26841225_744862592376172_998804515399431440_o.jpg?_nc_cat=105&ccb=1-6&_nc_sid=174925&_nc_ohc=Ckvxss-PJRoAX9aghkw&_nc_ht=scontent.fhan11-1.fna&oh=00_AT_Ee3hxiRkntw7aXCgRvyBBrdmPOLxrOuh-n-9gSm35Hw&oe=62A82296"
-            height={50}
-            width={50}
-            borderRadius={100}
-            marginRight={3}
-         />
-      ),
-      icon: <Options />,
-   },
-];
-const FeedCard = ({ desc, id, like, createAt, userId }) => {
+const FeedCard = ({ desc, id, like, createdAt, userId }) => {
    const [comment, setComment] = useState<string>("");
    const userData = useRecoilValue(userDataState);
    const [likeCount, setLikeCount] = useState<number>(like.length);
    const [liked, setLiked] = useState(false);
+
+   console.log(createdAt);
+
 
    useEffect(() => {
       if (like.includes(userData._id)) {
@@ -66,7 +54,7 @@ const FeedCard = ({ desc, id, like, createAt, userId }) => {
          <Box className={styles.detailcard}>
             <DetailCard
                label1={userId}
-               label2={createAt}
+               label2={convertToDateTime(createdAt)}
                leftImg={
                   <Image
                      src="https://www.w3schools.com/howto/img_avatar.png"
@@ -77,7 +65,7 @@ const FeedCard = ({ desc, id, like, createAt, userId }) => {
                   />
                }
                rightIcon={<Options />}
-               onClick={() => {}}
+               onClick={() => { }}
             />
          </Box>
          <Text textAlign={"left"} marginTop={"2"} fontWeight={700}>
