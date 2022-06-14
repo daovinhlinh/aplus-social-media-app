@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
    Navigate,
    Outlet,
@@ -6,6 +6,7 @@ import {
    RouteProps,
    Routes,
    useLocation,
+   useNavigate,
 } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import "./App.css";
@@ -27,12 +28,22 @@ import Usermanager from "./pages/UserManager/Usermanager";
 import { userDataState } from "./store/user";
 
 const PrivateRoute = (props: RouteProps) => {
-   const userData = useRecoilValue(userDataState);
-   const location = useLocation();
+   const [userData, setUserData] = useRecoilState(userDataState);
+   const localUserData = localStorage.getItem("userData");
+   const navigate = useNavigate();
 
-   if (!userData) {
-      return <Navigate to="/login" state={{ from: location }} />;
-   }
+   useEffect(() => {
+      if (localUserData) {
+         setUserData(JSON.parse(localUserData));
+         navigate("/");
+      } else {
+         navigate("/login");
+      }
+   }, []);
+
+   // if (!userData) {
+   //    return <Navigate to="/login" state={{ from: location }} />;
+   // }
 
    return <Outlet {...props} />;
 };
