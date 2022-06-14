@@ -21,23 +21,36 @@ import DetailCard from "../DetailCard";
 import InputField from "../InputField";
 import styles from "./styles.module.scss";
 
-const FeedCard = ({ desc, id, like, createdAt, userId }) => {
-   const [comment, setComment] = useState<string>("");
+export interface IFeed { 
+   _id: string;
+   userId: string;
+   desc: string;
+   img?: string;
+   likes: string[];
+   createdAt: Date;
+   updatedAt?: Date;
+}
+
+const FeedCard = ({ desc, _id, likes, createdAt, userId }: IFeed) => {
+   const [comment, setComment] = useState<any>();
    const userData = useRecoilValue(userDataState);
-   const [likeCount, setLikeCount] = useState<number>(like.length);
+   const [likeCount, setLikeCount] = useState<number>(likes.length);
    const [liked, setLiked] = useState(false);
 
-   console.log(createdAt);
-
-
    useEffect(() => {
-      if (like.includes(userData._id)) {
+      if (likes.includes(userData._id)) {
          setLiked(true);
       }
+
+      (async ()=> {
+         const commentListRes = await axiosClient.get(`/comment/${_id}`);               
+         setComment(commentListRes.data);
+      })();
+   
    }, []);
 
    const handleLikePost = () => {
-      axiosClient.put(`post/${id}/like`, { userId: userData._id });
+      axiosClient.put(`post/${_id}/like`, { userId: userData._id });
       setLikeCount(liked ? likeCount - 1 : likeCount + 1);
       setLiked(!liked);
    };
@@ -80,7 +93,7 @@ const FeedCard = ({ desc, id, like, createdAt, userId }) => {
             px={4}
          >
             <CustomButton onClick={handleLikePost} leftIcon={<Heart />}>
-               <Text fontSize={14} fontWeight={600} color="#696969">
+               <Text fontSize={14} fontWeight={600} color={liked ? "red.500" :  "#696969"}>
                   {likeCount} Likes
                </Text>
             </CustomButton>
@@ -97,6 +110,18 @@ const FeedCard = ({ desc, id, like, createdAt, userId }) => {
                </Text>
             </HStack>
          </Flex>
+         {
+            comment && 
+         <Flex flexDirection='column'>
+               {
+                  comment.comments.map((item, index)=> {
+                     return (
+                        <div>{comment.users[index].username} : {item.desc}</div>
+                     )
+                  }) 
+               }
+         </Flex>
+             }
          <InputField
             image="https://www.w3schools.com/howto/img_avatar.png"
             placeholder="Write your comment..."
