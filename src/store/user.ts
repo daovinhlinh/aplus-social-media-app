@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 const USER_DATA = "userData";
 
-interface UserData {
+export interface UserData {
    _id: string;
    username: string;
    email: string;
