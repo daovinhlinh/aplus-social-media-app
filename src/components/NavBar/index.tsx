@@ -24,7 +24,12 @@ const Navbar = () => {
          py="10px"
          px="20px"
       >
-         <Box height={66} width={92} onClick={() => navigate("/")}>
+         <Box
+            height={66}
+            width={92}
+            cursor="pointer"
+            onClick={() => navigate("/")}
+         >
             <Image
                src="https://i.imgur.com/udioN9R.png"
                width="100%"
