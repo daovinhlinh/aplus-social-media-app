@@ -1,4 +1,4 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Box, Flex, Image, Spinner } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -13,21 +13,6 @@ import DetailCard from "../DetailCard";
 import IconCard from "../IconCard";
 import Navbar from "../NavBar";
 import styles from "./styles.module.scss";
-
-const detailcards = {
-   title1: "Hồng Anh Amie",
-   title2: "Trap Girl",
-   img: (
-      <Image
-         src="https://scontent.fhan11-1.fna.fbcdn.net/v/t31.18172-8/26841225_744862592376172_998804515399431440_o.jpg?_nc_cat=105&ccb=1-6&_nc_sid=174925&_nc_ohc=Ckvxss-PJRoAX9aghkw&_nc_ht=scontent.fhan11-1.fna&oh=00_AT_Ee3hxiRkntw7aXCgRvyBBrdmPOLxrOuh-n-9gSm35Hw&oe=62A82296"
-         height={50}
-         width={50}
-         borderRadius={100}
-         marginRight={3}
-      />
-   ),
-   icon: <Options />,
-};
 
 const userFeatureList = [
    {
@@ -61,9 +46,18 @@ const PageContainer = (props: any) => {
    const { isAdmin, children, featureList, page } = props;
    const userData = useRecoilValue(userDataState);
    const navigate = useNavigate();
+   const imgFolder = import.meta.env.VITE_CDN_URL;
 
    if (!userData) {
-      return <div>Loading</div>;
+      return (
+         <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="red.500"
+            size="xl"
+         />
+      );
    }
 
    return (
@@ -88,9 +82,9 @@ const PageContainer = (props: any) => {
                className={styles.feature}
             >
                <DetailCard
-                  label1={userData.username}
+                  userId={userData.username}
                   label2={userData.email}
-                  leftImg={detailcards.img}
+                  leftImg={imgFolder + userData.avatar}
                   onClick={() => {}}
                   _hover={{
                      bg: "white",

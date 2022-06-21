@@ -1,11 +1,11 @@
 import { Box, Text } from "@chakra-ui/react";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import Photo from "../../assets/Icons/Photo";
 import Send from "../../assets/Icons/Send";
 import FeedCard, { IFeed } from "../../components/FeedCard";
 import InputField from "../../components/InputField";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import PageContainer from "../../components/PageContainer";
 import { userDataState } from "../../store/user";
 import { axiosClient } from "../../utils/axiosClient";
@@ -52,7 +52,7 @@ const NewFeed = () => {
    }, [userData]);
 
    if (loading) {
-      return <div>Loading...</div>;
+      return <LoadingSpinner />;
    }
 
    return (
