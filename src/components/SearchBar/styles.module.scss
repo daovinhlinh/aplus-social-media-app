@@ -1,0 +1,12 @@
+.searchResult {
+    &::-webkit-scrollbar {
+       display: none;
+    }
+ 
+    ::-webkit-scrollbar-thumb:hover {
+       display: none;
+    }
+ 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+ }
