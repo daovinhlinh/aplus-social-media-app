@@ -3,23 +3,20 @@ import {
    Button,
    HStack,
    Image,
-   Popover,
-   PopoverArrow,
-   PopoverBody,
+   Popover, PopoverBody,
    PopoverContent,
    PopoverTrigger,
-   Portal,
-   Spacer,
-   Text,
+   Portal, Spacer,
+   Text
 } from "@chakra-ui/react";
-import React, { ReactChild } from "react";
+import { ReactChild } from "react";
 import { useRecoilValue } from "recoil";
 import Edit from "../../assets/Icons/Edit";
-import Pen from "../../assets/Icons/Pen";
 import { userDataState } from "../../store/user";
 
 interface DetailCardProps {
    leftImg?: string;
+   imgSize?: number;
    rightIcon?: ReactChild;
    userId: string;
    label2: string;
@@ -28,19 +25,28 @@ interface DetailCardProps {
 }
 
 const DetailCard = (props: DetailCardProps) => {
-   const { leftImg, rightIcon, userId, label2, onClick, ...buttonStyle } =
-      props;
+   const {
+      leftImg,
+      imgSize,
+      rightIcon,
+      userId,
+      label2,
+      onClick,
+      ...buttonStyle
+   } = props;
    const userData = useRecoilValue(userDataState);
+   const imgFolder = import.meta.env.VITE_CDN_URL;
 
    return (
       <HStack width={"100%"} onClick={onClick} {...buttonStyle}>
          <Box>
             <Image
-               height={50}
-               width={50}
+               height={imgSize ?? 50}
+               width={imgSize ?? 50}
                borderRadius={100}
                marginRight={3}
                src={leftImg}
+            // onError={(e) => (e.target.src = `${imgFolder}person/noAvatar.png`)}
             />
          </Box>
          <Box textAlign={"start"}>
@@ -52,49 +58,43 @@ const DetailCard = (props: DetailCardProps) => {
             </Text>
          </Box>
          <Spacer />
-         <Popover offset={[-60, -10]}>
-            <PopoverTrigger>
-               <Button
-                  bg="transparent"
-                  variant="unstyled"
-                  _expanded={{ boxShadow: "none" }}
-                  _focus={{ boxShadow: "none" }}
-               >
-                  {rightIcon}
-               </Button>
-            </PopoverTrigger>
-            <Portal>
-               <PopoverContent
-                  border="none"
-                  _focus={{ boxShadow: "#ccc" }}
-                  width="fit-content"
-               >
-                  <PopoverBody
-                     display="flex"
-                     flexDirection="column"
-                     alignItems="flex-start"
+         {rightIcon && (
+            <Popover offset={[-60, -10]}>
+               <PopoverTrigger>
+                  <Button
+                     bg="transparent"
+                     variant="unstyled"
+                     _expanded={{ boxShadow: "none" }}
+                     _focus={{ boxShadow: "none" }}
                   >
-                     {/* <Button colorScheme='blue'>{rightIcon}</Button> */}
-                     <Button
-                        bg="none"
-                        _hover={{ bg: "none" }}
-                        leftIcon={<Edit />}
+                     {rightIcon}
+                  </Button>
+               </PopoverTrigger>
+               <Portal>
+                  <PopoverContent
+                     border="none"
+                     _focus={{ boxShadow: "#ccc" }}
+                     width="fit-content"
+                  >
+                     <PopoverBody
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="flex-start"
                      >
-                        Chỉnh sửa bài viết
-                     </Button>
-                     {userData._id === userId && (
-                        <Button
-                           bg="none"
-                           _hover={{ bg: "none" }}
-                           leftIcon={<Edit />}
-                        >
-                           Xóa
+                        {/* <Button colorScheme='blue'>{rightIcon}</Button> */}
+                        <Button bg="none" _hover={{ bg: "none" }} leftIcon={<Edit />}>
+                           Chỉnh sửa bài viết
                         </Button>
-                     )}
-                  </PopoverBody>
-               </PopoverContent>
-            </Portal>
-         </Popover>
+                        {userData._id === userId && (
+                           <Button bg="none" _hover={{ bg: "none" }} leftIcon={<Edit />}>
+                              Xóa
+                           </Button>
+                        )}
+                     </PopoverBody>
+                  </PopoverContent>
+               </Portal>
+            </Popover>
+         )}
       </HStack>
    );
 };
