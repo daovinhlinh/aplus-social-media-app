@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import {
-   Outlet,
-   Route,
-   RouteProps,
-   Routes,
-   useNavigate,
+  Outlet,
+  Route,
+  RouteProps,
+  Routes,
+  useNavigate,
 } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import "./App.css";
+import React from "react";
 import FriendList from "./pages/FriendList";
 import Members from "./pages/Group/Members";
 import PhotoListG from "./pages/Group/Photos";
@@ -24,44 +25,44 @@ import Usermanager from "./pages/UserManager/Usermanager";
 import { userDataState } from "./store/user";
 
 const PrivateRoute = (props: RouteProps) => {
-   const [userData, setUserData] = useRecoilState(userDataState);
-   const localUserData = localStorage.getItem("userData");
-   const navigate = useNavigate();
+  const [userData, setUserData] = useRecoilState(userDataState);
+  const localUserData = localStorage.getItem("userData");
+  const navigate = useNavigate();
 
-   useEffect(() => {
-      if (localUserData) {
-         setUserData(JSON.parse(localUserData));
-         navigate("/");
-      } else {
-         navigate("/login");
-      }
-   }, []);
+  useEffect(() => {
+    if (localUserData) {
+      setUserData(JSON.parse(localUserData));
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }, []);
 
-   return <Outlet {...props} />;
+  return <Outlet {...props} />;
 };
 
 function App() {
-   return (
-      <div className="App">
-         <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route element={<PrivateRoute />}>
-               <Route path="/" element={<NewFeed />} />
-               <Route path="/friend" element={<FriendList />} />
-               <Route path="/photo" element={<PhotoList />} />
-               <Route path="/profile/:id" element={<Profile />} />
-               <Route path="/UserMng" element={<Usermanager />} />
-               <Route path="/postG" element={<PostGroup />} />
-               <Route path="/group" element={<ProfileGroup />} />
-               <Route path="/groupM" element={<ProfileGroupM />} />
-               <Route path="/photoG" element={<PhotoListG />} />
-               <Route path="/MemG" element={<Members />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-         </Routes>
-      </div>
-   );
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<NewFeed />} />
+          <Route path="/friend" element={<FriendList />} />
+          <Route path="/photo" element={<PhotoList />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/UserMng" element={<Usermanager />} />
+          <Route path="/postG" element={<PostGroup />} />
+          <Route path="/group" element={<ProfileGroup />} />
+          <Route path="/groupM" element={<ProfileGroupM />} />
+          <Route path="/photoG" element={<PhotoListG />} />
+          <Route path="/MemG" element={<Members />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
