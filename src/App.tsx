@@ -1,16 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import {
-   Navigate,
    Outlet,
    Route,
    RouteProps,
    Routes,
-   useLocation,
    useNavigate,
 } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import "./App.css";
-import { AuthContext } from "./context/authContext";
 import FriendList from "./pages/FriendList";
 import Members from "./pages/Group/Members";
 import PhotoListG from "./pages/Group/Photos";
@@ -21,7 +18,6 @@ import Login from "./pages/Login";
 import NewFeed from "./pages/NewFeed";
 import NotFound from "./pages/NotFound";
 import PhotoList from "./pages/PhotoList";
-import PostList from "./pages/PostList";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Usermanager from "./pages/UserManager/Usermanager";
@@ -41,10 +37,6 @@ const PrivateRoute = (props: RouteProps) => {
       }
    }, []);
 
-   // if (!userData) {
-   //    return <Navigate to="/login" state={{ from: location }} />;
-   // }
-
    return <Outlet {...props} />;
 };
 
@@ -58,8 +50,7 @@ function App() {
                <Route path="/" element={<NewFeed />} />
                <Route path="/friend" element={<FriendList />} />
                <Route path="/photo" element={<PhotoList />} />
-               <Route path="/profile" element={<Profile />} />
-               <Route path="/post" element={<PostList />} />
+               <Route path="/profile/:id" element={<Profile />} />
                <Route path="/UserMng" element={<Usermanager />} />
                <Route path="/postG" element={<PostGroup />} />
                <Route path="/group" element={<ProfileGroup />} />
