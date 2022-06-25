@@ -1,5 +1,6 @@
+import React from "react";
 import { Box, Flex, Spinner } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import Friends from "../../assets/Icons/Friends";
 import IconProfile from "../../assets/Icons/IconProfile";
@@ -22,11 +23,6 @@ const userFeatureList = [
     title: "Profile",
     icon: <IconProfile />,
     link: "/profile",
-  },
-  {
-    title: "Friends",
-    icon: <Friends />,
-    link: "/friend",
   },
   {
     title: "Photos",
@@ -86,24 +82,25 @@ const PageContainer = (props: any) => {
               boxShadow: "base",
             }}
             _active={{
-              bg: "gray.100",
+              bg: "white",
               color: "red.500",
               boxShadow: "base",
             }}
           />
           {(isAdmin ? featureList : userFeatureList).map((item) => (
-            <IconCard
-              isActive={page === item.title}
-              label={item.title}
-              leftIcon={item.icon}
-              onClick={() => {
-                navigate(
-                  item.title === "Profile"
-                    ? `${item.link}/${userData.username}`
-                    : item.link
-                );
-              }}
-            />
+            <Link
+              to={
+                item.title === "Profile"
+                  ? `${item.link}/${userData.username}`
+                  : item.link
+              }
+            >
+              <IconCard
+                isActive={page === item.title}
+                label={item.title}
+                leftIcon={item.icon}
+              />
+            </Link>
           ))}
         </Box>
         <Box
@@ -119,7 +116,7 @@ const PageContainer = (props: any) => {
         >
           {children}
         </Box>
-        {!isAdmin && (
+        {/* {!isAdmin && (
           <Box
             bg="rgba(250, 250, 251, 1)"
             display={["none", "none", "none", "none", "block"]}
@@ -143,7 +140,7 @@ const PageContainer = (props: any) => {
               />
             ))}
           </Box>
-        )}
+        )} */}
       </Flex>
     </Flex>
   );
