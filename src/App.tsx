@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import "./App.css";
+import React from "react";
 import FriendList from "./pages/FriendList";
 import Members from "./pages/Group/Members";
 import PhotoListG from "./pages/Group/Photos";

@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import React from "react";
 import Friends from "../../assets/Icons/Friends";
 import IconProfile from "../../assets/Icons/IconProfile";
 import Photo from "../../assets/Icons/Photo";
