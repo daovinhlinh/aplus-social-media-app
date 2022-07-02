@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import Comment from "../../assets/Icons/Comment";
 import Heart from "../../assets/Icons/Heart";
 import Options from "../../assets/Icons/Options";
+import Send from "../../assets/Icons/Send";
 import { UserData, userDataState } from "../../store/user";
 import { axiosClient } from "../../utils/axiosClient";
 import { convertToDateTime } from "../../utils/datetime";
@@ -22,6 +23,7 @@ export interface IFeed {
   likes: string[];
   createdAt: Date;
   updatedAt?: Date;
+  deletePost: () => void;
 }
 export interface Comment {
   _id: string;
@@ -37,7 +39,14 @@ export interface CommentDetail {
   users: UserData[];
 }
 
-const FeedCard = ({ desc, _id, likes, createdAt, userId }: IFeed) => {
+const FeedCard = ({
+  desc,
+  _id,
+  likes,
+  createdAt,
+  userId,
+  deletePost,
+}: IFeed) => {
   const [comment, setComment] = useState<CommentDetail>();
   const [commentText, setCommentText] = useState("");
   const [showComment, setShowComment] = useState(false);
@@ -64,6 +73,21 @@ const FeedCard = ({ desc, _id, likes, createdAt, userId }: IFeed) => {
       .then(() => setLoading(false));
   }, []);
 
+  const handleCommentPost = async () => {
+    const newComment = { userId: userData._id, postId: _id, desc: commentText };
+    const res = await axiosClient.post("comment", newComment);
+
+    // const newData = {
+    //   ...comment,
+    //   comments: [res.data ,comment.comments]
+    // }
+    setComment({
+      users: [userData, ...comment.users],
+      comments: [res.data, ...comment.comments],
+    });
+    // setPostUser([...postUser, ...userData]);
+  };
+
   const handleLikePost = () => {
     axiosClient.put(`post/${_id}/like`, { userId: userData._id });
     setLikeCount(liked ? likeCount - 1 : likeCount + 1);
@@ -88,26 +112,24 @@ const FeedCard = ({ desc, _id, likes, createdAt, userId }: IFeed) => {
       borderRadius="15px"
     >
       <Box className={styles.detailcard}>
-        <Link to={`profile/${postUser.username}`}>
-          <DetailCard
-            userId={postUser.username}
-            label2={convertToDateTime(createdAt)}
-            leftImg="https://www.w3schools.com/howto/img_avatar.png"
-            rightIcon={<Options />}
-            onClick={() => {}}
-          />
-        </Link>
+        <DetailCard
+          userId={postUser.username}
+          label2={convertToDateTime(createdAt)}
+          leftImg="https://www.w3schools.com/howto/img_avatar.png"
+          rightIcon={<Options />}
+          deletePost={deletePost}
+        />
       </Box>
       <Text textAlign={"left"} marginTop={"5"} fontWeight={700}>
         {desc}
       </Text>
       <Flex
         justifyContent="space-around"
-        paddingY="3"
+        paddingY="3px"
         borderY="1px"
         borderColor="gray.300"
         my={4}
-        px={4}
+        px={10}
       >
         <CustomButton onClick={handleLikePost} leftIcon={<Heart />}>
           <Text
@@ -123,7 +145,7 @@ const FeedCard = ({ desc, _id, likes, createdAt, userId }: IFeed) => {
           onClick={() => setShowComment(!showComment)}
         >
           <Text fontSize={14} fontWeight={600} color="#696969">
-            {comment.comments.length ?? 0}
+            {comment.comments.length ?? 0} comments
           </Text>
         </CustomButton>
       </Flex>
@@ -133,33 +155,41 @@ const FeedCard = ({ desc, _id, likes, createdAt, userId }: IFeed) => {
             image="https://www.w3schools.com/howto/img_avatar.png"
             placeholder="Write your comment..."
             onChange={setCommentText}
+            suffixIcons={[
+              {
+                icon: <Send />,
+                onPress: handleCommentPost,
+              },
+            ]}
           />
           {comment && (
             <Stack mt={2} spacing={2}>
-              {comment.comments.map((item, index) => {
-                return (
-                  <Box display="flex" alignItems="center">
-                    <Image
-                      width="32px"
-                      height="32px"
-                      borderRadius="50%"
-                      mr={5}
-                      src="https://www.w3schools.com/howto/img_avatar.png"
-                    />
-                    <Box
-                      textAlign="left"
-                      backgroundColor="#F0F2F5"
-                      padding="8px 12px"
-                      borderRadius="18px"
-                    >
-                      <Text fontWeight={700}>
-                        {comment.users[index].username}
-                      </Text>
-                      <Text>{item.desc}</Text>
+              {comment.comments
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .map((item, index) => {
+                  return (
+                    <Box display="flex" alignItems="center">
+                      <Image
+                        width="32px"
+                        height="32px"
+                        borderRadius="50%"
+                        mr={5}
+                        src="https://www.w3schools.com/howto/img_avatar.png"
+                      />
+                      <Box
+                        textAlign="left"
+                        backgroundColor="#F0F2F5"
+                        padding="8px 12px"
+                        borderRadius="18px"
+                      >
+                        <Text fontWeight={700}>
+                          {comment.users[index].username}
+                        </Text>
+                        <Text>{item.desc}</Text>
+                      </Box>
                     </Box>
-                  </Box>
-                );
-              })}
+                  );
+                })}
             </Stack>
           )}
         </>

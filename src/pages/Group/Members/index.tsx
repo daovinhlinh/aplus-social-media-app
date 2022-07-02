@@ -4,7 +4,6 @@ import IconProfile from "../../../assets/Icons/IconProfile";
 import Photo from "../../../assets/Icons/Photo";
 import Post from "../../../assets/Icons/Post";
 import Video from "../../../assets/Icons/Video";
-import Friendslist from "../../../components/FriendsList";
 import PageContainer from "../../../components/PageContainer";
 import styles from "./styles.module.scss";
 
@@ -41,9 +40,7 @@ const Members = () => {
       <PageContainer isAdmin={true} featureList={featureList}>
         <Box className={styles.backgroundGprofile}></Box>
 
-        <Box className={styles.friendslist}>
-          <Friendslist />
-        </Box>
+        <Box className={styles.friendslist}>{/* <Friendslist /> */}</Box>
       </PageContainer>
     </div>
   );
