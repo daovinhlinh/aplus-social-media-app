@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bundled-es-modules/axios": "^0.27.2",
     "@chakra-ui/react": "^1.8.8",
     "@chakra-ui/system": "^1.12.1",
     "@emotion/react": "^11.9.0",
@@ -20,12 +21,13 @@
     "file-loader": "^6.2.0",
     "framer-motion": "^6.3.3",
     "keyframes": "^2.3.0",
+    "lodash": "^4.17.21",
     "react": "^18.0.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "recoil": "^0.7.2",
+    "recoil": "^0.7.3",
     "replace": "^1.2.1",
     "sass": "^1.51.0",
     "simple-peer": "^9.11.1",
@@ -35,7 +37,7 @@
     "yarn": "^1.22.18"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "vite --open",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
