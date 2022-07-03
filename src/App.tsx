@@ -24,6 +24,7 @@ import Register from "./pages/Register";
 import Usermanager from "./pages/UserManager/Usermanager";
 import { userDataState } from "./store/user";
 import React from "react";
+import Message from "./pages/Message";
 
 const PrivateRoute = (props: RouteProps) => {
   const [userData, setUserData] = useRecoilState(userDataState);
@@ -59,6 +60,7 @@ function App() {
           <Route path="/groupM" element={<ProfileGroupM />} />
           <Route path="/photoG" element={<PhotoListG />} />
           <Route path="/MemG" element={<Members />} />
+        <Route path="/message" element={<Message />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
