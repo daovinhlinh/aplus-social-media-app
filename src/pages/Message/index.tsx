@@ -14,6 +14,7 @@ import DetailCard from "../../components/DetailCard";
 import Edit from "../../assets/Icons/Edit";
 import Options from "../../assets/Icons/Options";
 import Messenger from "../../components/Messenger";
+import UserMessenger from "../../components/UserMessenger";
 
 const userMessage = [
   {
@@ -127,24 +128,40 @@ const Message = (props: any) => {
             </Box>
             <Options/>
           </Box>
-          <Messenger
-            py="10px"
-            px="6px"
-            userId={"item.username"}
-            label2={"item.lastMess"}
-            leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
-            onClick={() => {}}
-            _hover={{
-              bg: "white",
-              color: "red.500",
-              boxShadow: "base",
-            }}
-            _active={{
-              bg: "white",
-              color: "red.500",
-              boxShadow: "base",
-            }}
-          />
+          <Box>
+            <Messenger
+              py="10px"
+              px="6px"
+              userId={"Nguyễn Văn A"}
+              label2={"Hello anh em !"}
+              leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
+              onClick={() => {}}
+            />
+            <UserMessenger
+              py="10px"
+              px="6px"
+              label2={"Hello anh em !"}
+              leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
+              onClick={() => {}}
+            />
+            <Messenger
+              py="10px"
+              px="6px"
+              userId={"Nguyễn Văn A"}
+              label2={"How are you"}
+              leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
+              onClick={() => {}}
+            />
+            <Messenger
+              py="10px"
+              px="6px"
+              userId={"Nguyễn Văn A"}
+              label2={"lô lô cc"}
+              leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
+              onClick={() => {}}
+            />
+          </Box>
+          
         </Box>
         <Box
           bg="rgba(250, 250, 251, 1)"
