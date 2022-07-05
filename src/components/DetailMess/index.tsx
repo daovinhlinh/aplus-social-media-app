@@ -41,7 +41,7 @@ const DetailMess = (props: DetailMessProps) => {
 
   return (
     <HStack width={"100%"} {...buttonStyle}>
-        <Box display="flex">
+        <Box display="flex" >
           <Box>
             <Image
               height={imgSize ?? 50}
