@@ -66,7 +66,6 @@ const DetailCard = (props: DetailCardProps) => {
               borderRadius={100}
               marginRight={3}
               src={leftImg}
-              // onError={(e) => (e.target.src = `${imgFolder}person/noAvatar.png`)}
             />
           </Box>
           <Box textAlign={"start"}>

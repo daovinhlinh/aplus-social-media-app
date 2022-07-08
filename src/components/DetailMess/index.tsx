@@ -1,69 +1,53 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import {
   Box,
   Button,
   HStack,
   Image,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  Portal,
-  Spacer,
   Text,
   useBoolean,
 } from "@chakra-ui/react";
-import { ReactChild } from "react";
-import { useRecoilValue } from "recoil";
-import Edit from "../../assets/Icons/Edit";
-import { userDataState } from "../../store/user";
-import React from "react";
-import { Link } from "react-router-dom";
 
-interface DetailMessProps {
-  leftImg?: string;
-  imgSize?: number;
-  userId: string;
-  label2: string;
-  [x: string]: any; //rest props
-}
+export default function DetailMess({ conversation, currentUser }) {
+  const [user, setUser] = useState(null);
 
-const DetailMess = (props: DetailMessProps) => {
-  const {
-    leftImg,
-    imgSize,
-    userId,
-    label2,
-    ...buttonStyle
-  } = props;
+  useEffect(() => {
+    const friendId = conversation.members.find((m) => m !== currentUser._id);
 
-
-
+    const getUser = async () => {
+      try {
+        const res = await axios("http://localhost:3001/api/user?userId=" + friendId);
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, [currentUser, conversation]);
 
   return (
-    <HStack width={"100%"} {...buttonStyle}>
-        <Box display="flex" >
-          <Box>
-            <Image
-              height={imgSize ?? 50}
-              width={imgSize ?? 50}
+    <Box display={'flex'} alignItems="center" padding={10}
+      cursor="pointer" marginTop={20} 
+      _hover={{
+        bg: "rgb(245, 243, 243)",
+        boxShadow: "base",
+      }}
+    >
+      <Box>
+          <Image
+              height={40}
+              width={40}
               borderRadius={100}
               marginRight={3}
-              src={leftImg}
+              src={
+                user?.avatar
+                  ? 'http://localhost:3001/user/images/' + user.avatar
+                  : 'http://localhost:3001/user/images/person/noAvatar.png'
+              }
             />
-          </Box>
-          <Box textAlign={"start"}>
-            <Text color="black" fontWeight="bold" fontSize={"md"}>
-              {userId}
-            </Text>
-            <Text color="gray.500" fontSize={"sm"}>
-              {label2}
-            </Text>
-          </Box>
-        </Box>
-      <Spacer />
-      
-    </HStack>
+          <Text color="black" fontWeight="bold" fontSize={"md"}>{user?.username}</Text>
+      </Box>
+    </Box>
   );
-};
-
-export default DetailMess;
+}
