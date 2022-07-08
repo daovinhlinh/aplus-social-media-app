@@ -102,34 +102,6 @@ const Navbar = () => {
                      </Box>
                   </Box>
             </Box>
-            <Box width={"100%"} boxShadow="base" borderRadius={8}>
-                  <Box display="flex"  
-                     py="10px" 
-                     _hover={{
-                     bg: "white",
-                     color: "red.500",
-                     boxShadow: "base",
-                     }}
-                     _active={{
-                     bg: "white",
-                     color: "red.500",
-                     boxShadow: "base",
-                     }}
-                  >
-                     <Alam/>
-                     <Box textAlign={"start"} paddingLeft={8}>
-                        <Text color="black" fontWeight="bold" fontSize={"sm"}>
-                           Bạn có thông báo mới
-                        </Text>
-                        <Text color="black" fontSize={"md"}>
-                           Bạn có thông báo mới
-                        </Text>
-                     </Box>
-                     <Box position={"absolute"} right={4}>
-                        <Options/>
-                     </Box>
-                  </Box>
-            </Box>
          </Box>}
       </HStack>
    );
