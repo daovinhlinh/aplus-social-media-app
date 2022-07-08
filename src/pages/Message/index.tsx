@@ -1,211 +1,207 @@
-import { Box, Flex, Text, Spinner, Image } from "@chakra-ui/react";
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import {
+  Button,
+  HStack,
+  Image,
+  Input,
+  Text,
+  Box,
+} from "@chakra-ui/react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { SocketContext} from "../../utils/SocketContext"
+import { Context } from "../../context/Context";
+import axios from "axios";
 import Navbar from "../../components/NavBar";
-import { Link, useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import IconProfile from "../../assets/Icons/IconProfile";
-import Photo from "../../assets/Icons/Photo";
-import Post from "../../assets/Icons/Post";
-import Video from "../../assets/Icons/Video";
-import { userDataState } from "../../store/user";
-import styles from "./styles.module.scss";
 import DetailMess from "../../components/DetailMess";
-import DetailCard from "../../components/DetailCard";
-import Edit from "../../assets/Icons/Edit";
-import Options from "../../assets/Icons/Options";
 import Messenger from "../../components/Messenger";
-import UserMessenger from "../../components/UserMessenger";
+import ChatOnline from "../../components/ChatOnline";
+import { OutlinedInput } from "@mui/material";
 
-const userMessage = [
-  {
-    username: "Nguyễn Văn A",
-    lastMess: "Hello",
-    avatar: "https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C",
-  },
-  {
-    username: "Thái Sơn",
-    lastMess: "Hello acd ádafg",
-    avatar: "https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C",
-  },
-  {
-    username: "Hùng",
-    lastMess: "Hello",
-    avatar: "https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C",
-  },
-  {
-    username: "Linh",
-    lastMess: "Hello",
-    avatar: "https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C",
-  },
-];
+export default function Message({socket}) {
+  const [conversations, setConversations] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const { user } = useContext(Context);
+  const scrollRef = useRef();
 
-const Message = (props: any) => {
+  useEffect(() => {
+    socket.current?.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
 
-  const imgFolder = import.meta.env.VITE_CDN_URL;
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+
+  useEffect(() => {
+    socket.current?.on("getUsers", (users) => {
+      setOnlineUsers(
+        user.followings.filter((f) => users.some((u) => u.userId === f))
+      );
+    });
+  }, [user]);
+
+  useEffect(() => {
+    const getConversations = async () => {
+      try {
+        const res = await axios.get("http://localhost:3003/api/conversation/" + user._id);
+        setConversations(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getConversations();
+  }, [user._id]);
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get("http://localhost:3003/api/message/" + currentChat?._id);
+        setMessages(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMessages();
+  }, [currentChat]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const message = {
+      sender: user._id,
+      text: newMessage,
+      conversationId: currentChat._id,
+    };
+
+    const receiverId = currentChat.members.find(
+      (member) => member !== user._id
+    );
+
+    socket.current?.emit("sendMessage", {
+      senderId: user._id,
+      receiverId,
+      text: newMessage,
+    });
+
+    socket.current?.emit("sendNotification", {
+      sendUserName: user.username,
+      sendUserId: user._id,
+      receiveUserId: receiverId,
+      post: newMessage,
+      type:8
+    });
+
+    try {
+      axios.post("http://localhost:3001/api/notification",{ 
+        sendUserId: user._id,
+        sendUserName: user.username,
+        receiveUserId: receiverId,
+        type: 8,
+        post: newMessage
+      });
+    } 
+    catch (err) {
+      console.log(err)
+    }
+
+    try {
+      const res = await axios.post("http://localhost:3003/api/message", message);
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+  }, [messages]);
 
   return (
-    <React.Suspense fallback={<div>Loading...</div>}>
-      <Navbar/>
-      <Flex width="100%" justifyContent="space-between">
-        <Box
-          bg="rgba(250, 250, 251, 1)"
-          boxShadow="base"
-          width="20%"
-          minWidth="300px"
-          px="10px"
-          py="30px"
-          height="92vh"
-          overflowY="scroll"
-          overflowX="hidden"
-          margin="auto 0"
-          className={styles.feature}
-        >
-          <Text
-            py="10px"
-            fontSize={20}
-            fontWeight = {700}
-            color = "rgba(0, 0, 0, 0.36)"
-          >RECENTLY</Text>
-          {(userMessage).map((item) => (
-            <DetailMess
-              py="10px"
-              px="6px"
-              userId={item.username}
-              label2={item.lastMess}
-              leftImg={item.avatar}
-              onClick={() => {}}
-              _hover={{
-                bg: "white",
-                color: "red.500",
-                boxShadow: "base",
-              }}
-              _active={{
-                bg: "white",
-                color: "red.500",
-                boxShadow: "base",
-              }}
+    <>
+      <Navbar socket={socket}/>
+      <Box height={'100vh-70px'} display={'flex'}>
+        <Box flex={3}>
+          <Box padding={10} height={'100%'}>
+            <Input placeholder="Search for friends" width={"90%"} 
+              padding={'10px 0'}
+              border={'none'}
+              borderBottom = {'1px solid gray'}
             />
-          ))} 
+            {conversations.map((c) => (
+              <Box onClick={() => setCurrentChat(c)}>
+                <DetailMess conversation={c} currentUser={user} />
+              </Box>
+            ))}
+          </Box>
         </Box>
-        
-        <Box
-          bg="rgba(250, 250, 251, 1)"
-          boxShadow="base"
-          width="60%"
-          minWidth="300px"
-          px="10px"
-          py="30px"
-          height="92vh"
-          overflowY="scroll"
-          overflowX="hidden"
-          margin="auto 0"
-          className={styles.feature}
-          
-        >
-          <Box
-            display={"flex"}
-            justifyContent = "space-between"
-            paddingBottom={4}
-            borderBottom= "1px solid #E0DCDC" 
-          >
-            <Box
-              display={"flex"}
-            >
-              <Image
-                height={ 50}
-                width={ 50}
-                borderRadius={100}
-                marginRight={3}
-                src={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
-              />
-              
-              <Text
-                fontSize={24}
-                fontWeight = {700}
+        <Box flex={5.5} width={'100%'} padding={20}>
+            {currentChat ? (
+              <><Box display={"flex"} flexDirection="column" justifyContent={'space-between'}
+                position="relative" borderRadius={15} boxShadow ="0px 0px 16px -8px rgba(0, 0, 0, 0.68)"
+                padding={10} height='100%'
               >
-                Nguyễn Văn A
-              </Text>
-            </Box>
-            <Options/>
-          </Box>
-          <Box>
-            <Messenger
-              py="10px"
-              px="6px"
-              userId={"Nguyễn Văn A"}
-              label2={"Hello anh em !"}
-              leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
-              onClick={() => {}}
-            />
-            <UserMessenger
-              py="10px"
-              px="6px"
-              label2={"Hello anh em !"}
-              leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
-              onClick={() => {}}
-            />
-            <Messenger
-              py="10px"
-              px="6px"
-              userId={"Nguyễn Văn A"}
-              label2={"How are you"}
-              leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
-              onClick={() => {}}
-            />
-            <Messenger
-              py="10px"
-              px="6px"
-              userId={"Nguyễn Văn A"}
-              label2={"lô lô cc"}
-              leftImg={"https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/274709899_2450928591728366_7205751784882790502_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=lM27hyNTnZIAX8IwcnM&_nc_ht=scontent.fhan3-5.fna&oh=00_AT9EIrN9uUCv1V9nYtu1G78scwkYRcTFTIPZrDZXwQxmCQ&oe=62C70B4C"}
-              onClick={() => {}}
-            />
-          </Box>
-          
+                <Box  height={'100%'} overflowY='scroll' padding={15} borderRadius={15}>
+                  {messages.map((m) => (
+                    <Box ref={scrollRef}>
+                      <Messenger message={m} own={m.sender === user._id}/>
+                    </Box>
+                  ))}
+                </Box>
+                <Box display={'flex'} alignItems='center' justifyContent={'space-between'}
+                  backgroundColor='rgb(240, 193, 128)' marginTop={10} borderRadius={15}
+                >
+                  <Input
+                    width={'80%'}
+                    height={90}
+                    margin={10}
+                    marginTop={20}
+                    border="0px solid white"
+                    borderRadius={20}
+                    placeholder="write something..."
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    value={newMessage}
+                  />
+                  <Button 
+                    width={70}
+                    height={40}
+                    border='none'
+                    borderRadius={5}
+                    cursor='pointer'
+                    backgroundColor={'lightseagreen'}
+                    color='whiteAlpha.700'
+                    marginRight={25}
+                    fontSize={18}
+                    onClick={handleSubmit}
+                  >
+                    Send
+                  </Button>
+                </Box>
+              </Box>
+              </>
+            ) : null}
         </Box>
-        <Box
-          bg="rgba(250, 250, 251, 1)"
-          boxShadow="base"
-          width="20%"
-          minWidth="300px"
-          px="10px"
-          py="30px"
-          height="92vh"
-          overflowY="scroll"
-          overflowX="hidden"
-          margin="auto 0"
-          className={styles.feature}
-        >
-          <Text
-            py="10px"
-            px="8px"
-            fontSize={20}
-            fontWeight = {700}
-            color = "rgba(0, 0, 0, 0.36)"
-          >ONLINES</Text>
-          {(userMessage).map((item) => (
-            <DetailCard
-              py="10px"
-              px="8px"
-              userId={item.username}
-              leftImg={item.avatar}
-              onClick={() => {}}
-              _hover={{
-                bg: "white",
-                color: "red.500",
-                boxShadow: "base",
-              }}
-              _active={{
-                bg: "white",
-                color: "red.500",
-                boxShadow: "base",
-              }}
+        <Box flex={3.5}>
+          <Box padding={10}
+            height='100%'
+          >
+            <ChatOnline
+              onlineUsers={onlineUsers}
+              currentId={user._id}
+              setCurrentChat={setCurrentChat}
             />
-          ))} 
+          </Box>
         </Box>
-      </Flex>
-    </React.Suspense>
+      </Box>
+    </>
   );
-};
-
-export default Message;
+}
