@@ -1,64 +1,56 @@
+import "./Messenger.css";
+import { format } from "timeago.js";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
   HStack,
   Image,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  Portal,
-  Spacer,
   Text,
-  useBoolean,
 } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
-import Edit from "../../assets/Icons/Edit";
-import { userDataState } from "../../store/user";
-import React from "react";
-import { Link } from "react-router-dom";
 
-interface MessengerProps {
-  leftImg?: string;
-  userId: string;
-  label2: string;
-  [x: string]: any; //rest props
-}
-const Messenger = (props: MessengerProps) => {
-  const {
-    leftImg,
-    imgSize,
-    userId,
-    label2,
-    ...buttonStyle
-  } = props;
+
+export default function Messenger({ message, own }) {
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+
+    const getUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:3001/api/user?userId=" + message.sender);
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, []);
 
 
   return (
-        <Box width={"100%"} display={""} {...buttonStyle} className="cardleft">
-            <Box display="flex">
-              <Box>
-                <Image
-                  height={imgSize ?? 45}
-                  width={imgSize ?? 45}
-                  borderRadius={100}
-                  marginRight={3}
-                  src={leftImg}
-                  marginTop={4}
-                />
-              </Box>
-              <Box textAlign={"start"}>
-                <Text color="gray.500" fontWeight="400" fontSize={"md"} marginLeft={4}>
-                  {userId}
-                </Text>
-                <Text color="gray.700" fontSize={"md"} className="textmess" backgroundColor={"blackAlpha.200"} borderRadius="20px" px={4} py={2}>
-                  {label2}
-                </Text>
-              </Box>
-            </Box>
-          <Spacer />
-        </Box>
+    <Box className={own ? "message own" : "message"} display='flex'
+      flexDirection={'column'}
+      marginTop={20}
+    >
+      {user? <><Box display={'flex'}>
+        <Image
+          width={32}
+          height={32}
+          borderRadius="50%"
+          objectFit={"cover"}
+          marginRight={10}
+          src={user.avatar
+            ? 'http://localhost:3001/user/images/' + user.avatar
+            : 'http://localhost:3001/user/images/person/noAvatar.png'}
+        />
+        <Text className="messageText" padding ={10} 
+          borderRadius={20}
+          backgroundColor="rgb(245, 241, 241)" color={'black'}
+          maxWidth={300}
+        >{message.text}</Text>
+      </Box>
+      <Box fontSize={12} marginTop={10}>{format(message.createdAt)}</Box></>: null}
+    </Box>
   );
-};
-
-export default Messenger;
+}

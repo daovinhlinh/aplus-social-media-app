@@ -1,0 +1,8 @@
+.message.own{
+    align-items: flex-end;
+}
+
+.message.own .messageText{
+    background-color: lightseagreen;
+    color: white;
+}
