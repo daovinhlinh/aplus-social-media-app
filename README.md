@@ -15,8 +15,12 @@
   - View other profile
   - View your profile
   - Add, Remove friend
+  - Follow user
   - Chat
   - Upload post (can contain with image)
+  - Delete post
+  - Search profile
+  - Notification
  
  ## Installation
   - Clone from repository
