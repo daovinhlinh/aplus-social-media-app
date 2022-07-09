@@ -6,9 +6,9 @@
 - [Installation](#installation)
   
  ## Introduction 
- 1. About the app
-  - This is a social network app
- 2. Features
+ ### 1. About the app
+  - This is an social network app built using ReactJS, RecoilJS, Chakra UI.
+ ### 2. Features
   - Register, Login, Logout
   - View your timeline, user posts
   - Like, comment
